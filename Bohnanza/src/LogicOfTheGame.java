@@ -3,7 +3,7 @@ public class LogicOfTheGame {
 
     public interface DrawPile
     {
-
+        Card[] getCardsFromTheDrawPile(int numberOfCardsToGet);
     }
 
     public interface Player
@@ -17,23 +17,25 @@ public class LogicOfTheGame {
 
     public interface Hand
     {
-        Card returnTheCardAtTheFrontOfTheHand();
+        Card getTheCardAtTheFrontOfTheHand();
         void AddACardToTheBackOfTheHand(Card cardToAddToTheBack);
+        String DisplayTheCardsInTheHand();
     }
 
     public interface Field
     {
-        int returnTheTotalCoinsThatCanBeGottenFromThisFieldNow();
-        Card returnTheTypeOfCardInThisField();
+        int getTheTotalCoinsThatCanBeGottenFromThisFieldNow();
+        String getTheTypeOfCardInThisField();
+        void getTheNumberOfCardsInThisField();
     }
 
     public interface Card
     {
         String returnTheTypeOfTheCard();
-        int returnTheNumberOfCardsOfThisTypeRequiredForOneCoin();
-        int returnTheNumberOfCardsOfThisTypeRequiredForTwoCoins();
-        int returnTheNumberOfCardsOfThisTypeRequiredForThreeCoins();
-        int returnTheNumberOfCardsOfThisTypeRequiredForFourPoints();
+        int getTheNumberOfCardsOfThisTypeRequiredForOneCoin();
+        int getTheNumberOfCardsOfThisTypeRequiredForTwoCoins();
+        int getTheNumberOfCardsOfThisTypeRequiredForThreeCoins();
+        int getTheNumberOfCardsOfThisTypeRequiredForFourPoints();
     }
 
 
