@@ -3,7 +3,7 @@ public class LogicOfTheGame {
 
     public interface DrawPile
     {
-        Card[] getCardsFromTheDrawPile(int numberOfCardsToGet);
+        Card getOneCardFromTheDrawPile();
     }
 
     public interface Player
@@ -39,12 +39,22 @@ public class LogicOfTheGame {
     }
 
 
-
-
-
-    public void theFunctionWhichHasTheLogic()
+    public void theFunctionWhichHasTheLogic(TheClassWhichHasThePlayerHandAndFields[] players, DrawPile drawPile, DrawPile discardPile)
     {
+        distributeTheInitialFiveCardsToThePlayer(players, drawPile);
+    }
 
+    private void distributeTheInitialFiveCardsToThePlayer(TheClassWhichHasThePlayerHandAndFields[] players, DrawPile drawPile)
+    {
+        int i = 0;
+        for(i = 0; i < players.length; i++)
+        {
+            int j = 0;
+            for(j = 0; j < 5; j++)
+            {
+                players[i].hand.AddACardToTheBackOfTheHand(drawPile.getOneCardFromTheDrawPile());
+            }
+        }
     }
 
 }
