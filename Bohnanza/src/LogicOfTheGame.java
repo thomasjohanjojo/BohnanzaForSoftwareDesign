@@ -9,7 +9,7 @@ public class LogicOfTheGame {
     public interface Player
     {
         void plant(Card cardsToPlant,Field fieldOfThePlayerToPlantTheseCards);
-        void harvest(Field aFieldWhichBelongsToThisPlayer);
+        void harvest(Field aFieldWhichBelongsToThisPlayer, Hand discardPile);
         void giveACardToTheOtherPlayer(Player playerToTradeTheCardsTo, Card cardsToTrade[]);
         void getACardFromTheOtherPlayer(Hand handOfThisPlayer, Player player);
         void drawCardsFromTheDrawPileIntoTheHand(DrawPile drawPile, Hand handOfThisPlayer);
@@ -40,14 +40,14 @@ public class LogicOfTheGame {
     }
 
 
-    public void theFunctionWhichHasTheLogic(TheClassWhichHasThePlayerHandAndFields[] players, DrawPile drawPile, DrawPile discardPile)
+    public void theFunctionWhichHasTheLogic(TheClassWhichHasThePlayerHandAndFields[] players, DrawPile drawPile, Hand discardPile)
     {
         distributeTheInitialFiveCardsToThePlayer(players, drawPile);
         loopOfPlayersGoingThroughTurns(players, drawPile, discardPile);
 
     }
 
-    private void loopOfPlayersGoingThroughTurns(TheClassWhichHasThePlayerHandAndFields[] players, DrawPile drawPile, DrawPile discardPile)
+    private void loopOfPlayersGoingThroughTurns(TheClassWhichHasThePlayerHandAndFields[] players, DrawPile drawPile,Hand discardPile)
     {
         int i = 0;
         for(i = 0; i < players.length; i++)
