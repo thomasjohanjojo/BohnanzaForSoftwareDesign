@@ -1,18 +1,28 @@
+import java.util.Collections;
+import java.util.List;
+
 public class DrawPileClass implements LogicOfTheGame.DrawPile
 {
-    LogicOfTheGame.Card[] cardsOfTheDrawPile;
+    List<LogicOfTheGame.Card> cardsOfTheDrawPile;
     int lengthOfTheDrawPileCardArray;
 
-    DrawPileClass(LogicOfTheGame.Card[] cardsOfTheDrawPile)
+    DrawPileClass(List<LogicOfTheGame.Card> cardsOfTheDrawPile)
     {
-        this.cardsOfTheDrawPile = cardsOfTheDrawPile;
-        lengthOfTheDrawPileCardArray = cardsOfTheDrawPile.length;
+
+
+        int i = 0;
+        LogicOfTheGame.Card temporaryStorageInTheLoop;
+        for(i = 0; i<cardsOfTheDrawPile.size();i++)
+        {
+            Collections.copy(this.cardsOfTheDrawPile, cardsOfTheDrawPile);
+        }
+        lengthOfTheDrawPileCardArray = cardsOfTheDrawPile.size();
     }
     @Override
     public LogicOfTheGame.Card getOneCardFromTheDrawPile()
     {
         LogicOfTheGame.Card cardToReturn;
-        cardToReturn = cardsOfTheDrawPile[lengthOfTheDrawPileCardArray];
+        cardToReturn = cardsOfTheDrawPile.removeFirst();
         lengthOfTheDrawPileCardArray = lengthOfTheDrawPileCardArray - 1;
         return cardToReturn;
     }
