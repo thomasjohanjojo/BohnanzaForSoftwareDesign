@@ -10,9 +10,10 @@ public class LogicOfTheGame {
     {
         void plant(Card cardsToPlant,Field fieldOfThePlayerToPlantTheseCards);
         void harvest(Field aFieldWhichBelongsToThisPlayer);
-        void tradeWithOtherPlayer(Player playerToTradeTheCardsTo, Card cardsToTrade[]);
+        void giveACardToTheOtherPlayer(Player playerToTradeTheCardsTo, Card cardsToTrade[]);
+        void getACardFromTheOtherPlayer(Hand handOfThisPlayer, Player player);
         void drawCardsFromTheDrawPileIntoTheHand(DrawPile drawPile, Hand handOfThisPlayer);
-        void turnOverCardsFromTheDrawPile(DrawPile drawPile, Card[] theTurnedOverHorizontalCardsOfThisPlayer);
+        void addCardsToTheTurnOverCardsAreaFromTheDrawPileAndTurnThemOver(DrawPile drawPile, Hand theAreaToKeepTheTurnedOverCards);
     }
 
     public interface Hand
@@ -52,6 +53,7 @@ public class LogicOfTheGame {
         for(i = 0; i < players.length; i++)
         {
             players[i].player.plant(players[i].hand.getTheCardAtTheFrontOfTheHand(), players[i].fieldOne);
+            players[i].player.addCardsToTheTurnOverCardsAreaFromTheDrawPileAndTurnThemOver(drawPile,players[i].theAreaToKeepTheTurnedOverCards);
         }
     }
 
