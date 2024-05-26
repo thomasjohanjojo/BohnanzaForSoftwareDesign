@@ -52,8 +52,20 @@ public class LogicOfTheGame {
         int i = 0;
         for(i = 0; i < players.length; i++)
         {
+            //Phase 1
             players[i].player.plant(players[i].hand.getTheCardAtTheFrontOfTheHand(), players[i].fieldOne);
+
+            //Phase 2
             players[i].player.addCardsToTheTurnOverCardsAreaFromTheDrawPileAndTurnThemOver(drawPile,players[i].theAreaToKeepTheTurnedOverCards);
+
+            //Phase 3
+            players[i].player.plant(players[i].theAreaToKeepTheTurnedOverCards.getTheCardAtTheFrontOfTheHand(), players[i].fieldOne);
+            players[i].player.plant(players[i].theAreaToKeepTheTurnedOverCards.getTheCardAtTheFrontOfTheHand(), players[i].fieldTwo);
+
+            //Phase 4
+            players[i].player.drawCardsFromTheDrawPileIntoTheHand(drawPile, players[i].hand);
+            players[i].player.drawCardsFromTheDrawPileIntoTheHand(drawPile, players[i].hand);
+            players[i].player.drawCardsFromTheDrawPileIntoTheHand(drawPile, players[i].hand);
         }
     }
 
