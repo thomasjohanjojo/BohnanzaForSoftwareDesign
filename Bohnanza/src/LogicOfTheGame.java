@@ -28,6 +28,8 @@ public class LogicOfTheGame {
         int getTheTotalCoinsThatCanBeGottenFromThisFieldNow();
         String getTheTypeOfCardInThisField();
         void getTheNumberOfCardsInThisField();
+        void addCardsToTheField(Card cardToAddToTheField);
+        Card removeACardFromTheTopOfTheField();
     }
 
     public interface Card
