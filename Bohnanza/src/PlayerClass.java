@@ -1,7 +1,10 @@
+import java.util.List;
+
 public class PlayerClass  implements LogicOfTheGame.Player
 {
 
-    int theNumberOfCoinsThatThePlayerCurrentlyHas = 0;
+    
+    List<LogicOfTheGame.Card> listWhichHoldsTheCardsWhichWereMadeIntoCoins;
     public void plant(LogicOfTheGame.Card cardsToPlant, LogicOfTheGame.Field fieldOfThePlayerToPlantTheseCards)
     {
         String theCardAboutToBePlanted = cardsToPlant.returnTheTypeOfTheCard();
@@ -27,44 +30,58 @@ public class PlayerClass  implements LogicOfTheGame.Player
 
         else
         {
+            LogicOfTheGame.Card aSampleCardOfThisField = aFieldWhichBelongsToThisPlayer.returnTheCardFromTheFieldWithoutRemovingIt();
+            if(aFieldWhichBelongsToThisPlayer.getTheNumberOfCardsInThisField() >= aSampleCardOfThisField.getTheNumberOfCardsOfThisTypeRequiredForFourCoins() )
+            {
 
-
-            while (aFieldWhichBelongsToThisPlayer.getTheNumberOfCardsInThisField() >= 1) {
-                LogicOfTheGame.Card cardTypeOfThisField = aFieldWhichBelongsToThisPlayer.returnTheCardFromTheFieldWithoutRemovingIt();
-                if (aFieldWhichBelongsToThisPlayer.getTheNumberOfCardsInThisField() > cardTypeOfThisField.getTheNumberOfCardsOfThisTypeRequiredForFourCoins()) {
-                    for (int i = 0; i < cardTypeOfThisField.getTheNumberOfCardsOfThisTypeRequiredForFourCoins(); i++) {
-                        discardPile.AddACardToTheBackOfTheHand(aFieldWhichBelongsToThisPlayer.removeACardFromTheTopOfTheField());
-                    }
-                }
-
-                else if (aFieldWhichBelongsToThisPlayer.getTheNumberOfCardsInThisField() > cardTypeOfThisField.getTheNumberOfCardsOfThisTypeRequiredForThreeCoins()) {
-                    for (int i = 0; i < cardTypeOfThisField.getTheNumberOfCardsOfThisTypeRequiredForThreeCoins(); i++) {
-                        discardPile.AddACardToTheBackOfTheHand(aFieldWhichBelongsToThisPlayer.removeACardFromTheTopOfTheField());
-                    }
-
-                }
-
-                else if (aFieldWhichBelongsToThisPlayer.getTheNumberOfCardsInThisField() > cardTypeOfThisField.getTheNumberOfCardsOfThisTypeRequiredForTwoCoins()) {
-                    for (int i = 0; i < cardTypeOfThisField.getTheNumberOfCardsOfThisTypeRequiredForTwoCoins(); i++) {
-                        discardPile.AddACardToTheBackOfTheHand(aFieldWhichBelongsToThisPlayer.removeACardFromTheTopOfTheField());
-                    }
-                }
-
-                else if (aFieldWhichBelongsToThisPlayer.getTheNumberOfCardsInThisField() >= cardTypeOfThisField.getTheNumberOfCardsOfThisTypeRequiredForOneCoin()) {
-                    for (int i = 0; i < cardTypeOfThisField.getTheNumberOfCardsOfThisTypeRequiredForOneCoin(); i++) {
-                        discardPile.AddACardToTheBackOfTheHand(aFieldWhichBelongsToThisPlayer.removeACardFromTheTopOfTheField());
-                    }
-                }
-
-                else if (aFieldWhichBelongsToThisPlayer.getTheNumberOfCardsInThisField() < cardTypeOfThisField.getTheNumberOfCardsOfThisTypeRequiredForOneCoin())
+                for(int i = 0; i < 4; i++)
                 {
-                    while(aFieldWhichBelongsToThisPlayer.getTheNumberOfCardsInThisField() > 0)
-                    {
-                        discardPile.AddACardToTheBackOfTheHand(aFieldWhichBelongsToThisPlayer.removeACardFromTheTopOfTheField());
-                    }
+                    listWhichHoldsTheCardsWhichWereMadeIntoCoins.add(aFieldWhichBelongsToThisPlayer.removeACardFromTheTopOfTheField());
                 }
 
+                while(aFieldWhichBelongsToThisPlayer.getTheNumberOfCardsInThisField() != 0)
+                {
+                    discardPile.AddACardToTheBackOfTheHand(aFieldWhichBelongsToThisPlayer.removeACardFromTheTopOfTheField());
+                }
+            }
 
+            else if(aFieldWhichBelongsToThisPlayer.getTheNumberOfCardsInThisField() >= aSampleCardOfThisField.getTheNumberOfCardsOfThisTypeRequiredForThreeCoins())
+            {
+                for(int i = 0; i < 3; i++)
+                {
+                    listWhichHoldsTheCardsWhichWereMadeIntoCoins.add(aFieldWhichBelongsToThisPlayer.removeACardFromTheTopOfTheField());
+                }
+
+                while(aFieldWhichBelongsToThisPlayer.getTheNumberOfCardsInThisField() != 0)
+                {
+                    discardPile.AddACardToTheBackOfTheHand(aFieldWhichBelongsToThisPlayer.removeACardFromTheTopOfTheField());
+                }
+            }
+
+            else if(aFieldWhichBelongsToThisPlayer.getTheNumberOfCardsInThisField() >= aSampleCardOfThisField.getTheNumberOfCardsOfThisTypeRequiredForTwoCoins())
+            {
+                for(int i = 0; i < 2; i++)
+                {
+                    listWhichHoldsTheCardsWhichWereMadeIntoCoins.add(aFieldWhichBelongsToThisPlayer.removeACardFromTheTopOfTheField());
+                }
+
+                while(aFieldWhichBelongsToThisPlayer.getTheNumberOfCardsInThisField() != 0)
+                {
+                    discardPile.AddACardToTheBackOfTheHand(aFieldWhichBelongsToThisPlayer.removeACardFromTheTopOfTheField());
+                }
+            }
+
+            else if(aFieldWhichBelongsToThisPlayer.getTheNumberOfCardsInThisField() >= aSampleCardOfThisField.getTheNumberOfCardsOfThisTypeRequiredForOneCoin())
+            {
+                for(int i = 0; i < 1; i++)
+                {
+                    listWhichHoldsTheCardsWhichWereMadeIntoCoins.add(aFieldWhichBelongsToThisPlayer.removeACardFromTheTopOfTheField());
+                }
+
+                while(aFieldWhichBelongsToThisPlayer.getTheNumberOfCardsInThisField() != 0)
+                {
+                    discardPile.AddACardToTheBackOfTheHand(aFieldWhichBelongsToThisPlayer.removeACardFromTheTopOfTheField());
+                }
             }
         }
 
@@ -94,7 +111,7 @@ public class PlayerClass  implements LogicOfTheGame.Player
 
     public int returnTheNumberOfCoinsThatThePlayerCurrentlyHas()
     {
-        return theNumberOfCoinsThatThePlayerCurrentlyHas;
+        return listWhichHoldsTheCardsWhichWereMadeIntoCoins.size();
     }
 
 
