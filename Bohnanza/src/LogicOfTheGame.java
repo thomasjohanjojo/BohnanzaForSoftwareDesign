@@ -10,7 +10,7 @@ public class LogicOfTheGame {
     {
         void plant(Card cardsToPlant,Field fieldOfThePlayerToPlantTheseCards);
         void harvest(Field aFieldWhichBelongsToThisPlayer, Hand discardPile);
-        void giveACardToTheOtherPlayer(Player playerToTradeTheCardsTo, Card cardsToTrade[]);
+        void giveACardToTheOtherPlayer(Player playerToTradeTheCardsTo, Card cardToTrade);
         void getACardFromTheOtherPlayer(Hand handOfThisPlayer, Player player);
         void drawCardsFromTheDrawPileIntoTheHand(DrawPile drawPile, Hand handOfThisPlayer);
         void addCardsToTheTurnOverCardsAreaFromTheDrawPileAndTurnThemOver(DrawPile drawPile, Hand theAreaToKeepTheTurnedOverCards);
@@ -27,7 +27,7 @@ public class LogicOfTheGame {
     {
         int getTheTotalCoinsThatCanBeGottenFromThisFieldNow();
         String getTheTypeOfCardInThisField();
-        void getTheNumberOfCardsInThisField();
+        int getTheNumberOfCardsInThisField();
         void addCardsToTheField(Card cardToAddToTheField);
         Card removeACardFromTheTopOfTheField();
     }
