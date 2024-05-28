@@ -14,6 +14,7 @@ public class LogicOfTheGame {
         void getACardFromTheOtherPlayer(Hand handOfThisPlayer, Player player);
         void drawCardsFromTheDrawPileIntoTheHand(DrawPile drawPile, Hand handOfThisPlayer);
         void addCardsToTheTurnOverCardsAreaFromTheDrawPileAndTurnThemOver(DrawPile drawPile, Hand theAreaToKeepTheTurnedOverCards);
+        int returnTheNumberOfCoinsThatThePlayerCurrentlyHas();
     }
 
     public interface Hand
@@ -30,6 +31,7 @@ public class LogicOfTheGame {
         int getTheNumberOfCardsInThisField();
         void addCardsToTheField(Card cardToAddToTheField);
         Card removeACardFromTheTopOfTheField();
+        Card returnTheCardFromTheFieldWithoutRemovingIt();
     }
 
     public interface Card
@@ -38,7 +40,7 @@ public class LogicOfTheGame {
         int getTheNumberOfCardsOfThisTypeRequiredForOneCoin();
         int getTheNumberOfCardsOfThisTypeRequiredForTwoCoins();
         int getTheNumberOfCardsOfThisTypeRequiredForThreeCoins();
-        int getTheNumberOfCardsOfThisTypeRequiredForFourPoints();
+        int getTheNumberOfCardsOfThisTypeRequiredForFourCoins();
     }
 
 
