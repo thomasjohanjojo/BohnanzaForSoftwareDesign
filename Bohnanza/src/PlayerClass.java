@@ -16,7 +16,7 @@ public class PlayerClass  implements LogicOfTheGame.Player
 
     public void harvest(LogicOfTheGame.Field aFieldWhichBelongsToThisPlayer, LogicOfTheGame.Hand discardPile)
     {
-
+        
     }
 
     public void giveACardToTheOtherPlayer(LogicOfTheGame.Player playerToTradeTheCardsTo, LogicOfTheGame.Card cardToTrade)
@@ -31,12 +31,14 @@ public class PlayerClass  implements LogicOfTheGame.Player
 
     public void drawCardsFromTheDrawPileIntoTheHand(LogicOfTheGame.DrawPile drawPile, LogicOfTheGame.Hand handOfThisPlayer)
     {
-
+        handOfThisPlayer.AddACardToTheBackOfTheHand(drawPile.getOneCardFromTheDrawPile());
     }
 
     public void addCardsToTheTurnOverCardsAreaFromTheDrawPileAndTurnThemOver(LogicOfTheGame.DrawPile drawPile, LogicOfTheGame.Hand theAreaToKeepTheTurnedOverCards)
     {
-
+        theAreaToKeepTheTurnedOverCards.AddACardToTheBackOfTheHand(drawPile.getOneCardFromTheDrawPile());
+        theAreaToKeepTheTurnedOverCards.AddACardToTheBackOfTheHand(drawPile.getOneCardFromTheDrawPile());
+        theAreaToKeepTheTurnedOverCards.DisplayTheCardsInTheHand();
     }
 
 
