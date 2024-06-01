@@ -3,6 +3,7 @@ public class LogicOfTheGame {
 
     public interface DrawPile
     {
+        void addACardToTheDrawPile(Card cardToBeAddedToTheDrawPile);
         Card getOneCardFromTheDrawPile();
     }
 

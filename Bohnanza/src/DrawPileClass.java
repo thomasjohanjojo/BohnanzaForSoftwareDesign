@@ -18,12 +18,16 @@ public class DrawPileClass implements LogicOfTheGame.DrawPile
         }
         lengthOfTheDrawPileCardArray = cardsOfTheDrawPile.size();
     }
-    @Override
     public LogicOfTheGame.Card getOneCardFromTheDrawPile()
     {
         LogicOfTheGame.Card cardToReturn;
         cardToReturn = cardsOfTheDrawPile.removeFirst();
         lengthOfTheDrawPileCardArray = lengthOfTheDrawPileCardArray - 1;
         return cardToReturn;
+    }
+
+    public void addACardToTheDrawPile(LogicOfTheGame.Card cardToBeAddedToTheDrawPile)
+    {
+
     }
 }
