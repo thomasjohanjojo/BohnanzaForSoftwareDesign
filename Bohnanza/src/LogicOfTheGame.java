@@ -64,7 +64,9 @@ public class LogicOfTheGame {
             players[i].player.addCardsToTheTurnOverCardsAreaFromTheDrawPileAndTurnThemOver(drawPile,players[i].theAreaToKeepTheTurnedOverCards);
 
             //Phase 3
+            players[i].player.harvest(players[i].fieldOne, discardPile);
             players[i].player.plant(players[i].theAreaToKeepTheTurnedOverCards.getTheCardAtTheFrontOfTheHand(), players[i].fieldOne);
+            players[i].player.harvest(players[i].fieldTwo, discardPile);
             players[i].player.plant(players[i].theAreaToKeepTheTurnedOverCards.getTheCardAtTheFrontOfTheHand(), players[i].fieldTwo);
 
             //Phase 4
