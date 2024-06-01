@@ -21,7 +21,7 @@ public class LogicOfTheGame {
     {
         Card getTheCardAtTheFrontOfTheHand();
         void AddACardToTheBackOfTheHand(Card cardToAddToTheBack);
-        String DisplayTheCardsInTheHand();
+        void DisplayTheCardsInTheHand();
     }
 
     public interface Field
@@ -32,6 +32,7 @@ public class LogicOfTheGame {
         void addCardsToTheField(Card cardToAddToTheField);
         Card removeACardFromTheTopOfTheField();
         Card returnTheCardFromTheFieldWithoutRemovingIt();
+        void displayAllTheCardsInTheField();
     }
 
     public interface Card
