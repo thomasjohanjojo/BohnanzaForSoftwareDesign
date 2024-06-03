@@ -1,5 +1,7 @@
 import java.util.List;
 import java.util.Collections;
+import java.util.Objects;
+
 public class FieldClass implements LogicOfTheGame.Field {
     List<LogicOfTheGame.Card> listOfCardsInTheField;
 
@@ -10,33 +12,67 @@ public class FieldClass implements LogicOfTheGame.Field {
 
     public String getTheTypeOfCardInThisField()
     {
-        String typeOfCard = "null";
-        return typeOfCard;
+        if(listOfCardsInTheField.size() != 0)
+        {
+            LogicOfTheGame.Card temporaryHolderObject;
+            temporaryHolderObject = listOfCardsInTheField.get(0);
+            return temporaryHolderObject.returnTheTypeOfTheCard();
+        }
+
+        else
+        {
+            return null;
+        }
+
     }
 
     public int getTheNumberOfCardsInThisField()
     {
-        return 0;
+        return listOfCardsInTheField.size();
     }
 
     public void addCardsToTheField(LogicOfTheGame.Card cardToAddToTheField)
     {
-        listOfCardsInTheField.add(cardToAddToTheField);
+        if(listOfCardsInTheField.size() == 0)
+        {
+            listOfCardsInTheField.add(cardToAddToTheField);
+        }
+
+        else
+        {
+            LogicOfTheGame.Card temporaryHolder;
+            temporaryHolder = listOfCardsInTheField.get(0);
+            if(Objects.equals(temporaryHolder.returnTheTypeOfTheCard(), cardToAddToTheField.returnTheTypeOfTheCard()))
+            {
+                listOfCardsInTheField.add(cardToAddToTheField);
+            }
+        }
     }
 
     public LogicOfTheGame.Card removeACardFromTheTopOfTheField()
     {
-        LogicOfTheGame.Card cardToBeRemoved;
-        return cardToBeRemoved;
+        if(listOfCardsInTheField.size() != 0)
+        {
+            return listOfCardsInTheField.removeFirst();
+        }
+        else
+        {
+            return null;
+        }
     }
 
     public LogicOfTheGame.Card returnTheCardFromTheFieldWithoutRemovingIt()
     {
-
+        LogicOfTheGame.Card temporaryHolderObjectForCard;
+        temporaryHolderObjectForCard = listOfCardsInTheField.getFirst();
+        return temporaryHolderObjectForCard;
     }
 
     public void displayAllTheCardsInTheField()
     {
-
+        for(int i = 0; i < listOfCardsInTheField.size(); i++)
+        {
+            System.out.print(" " + listOfCardsInTheField.get(i).returnTheTypeOfTheCard());
+        }
     }
 }
