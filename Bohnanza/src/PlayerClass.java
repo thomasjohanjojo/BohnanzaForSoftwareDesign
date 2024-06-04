@@ -97,6 +97,13 @@ public class PlayerClass  implements LogicOfTheGame.Player
                     }
                 }
             }
+
+            else
+            {
+                while (aFieldWhichBelongsToThisPlayer.getTheNumberOfCardsInThisField() != 0) {
+                    discardPile.AddACardToTheBackOfTheHand(aFieldWhichBelongsToThisPlayer.removeACardFromTheTopOfTheField());
+                }
+            }
         }
 
     }
@@ -120,7 +127,7 @@ public class PlayerClass  implements LogicOfTheGame.Player
     {
         theAreaToKeepTheTurnedOverCards.AddACardToTheBackOfTheHand(drawPile.getOneCardFromTheDrawPile());
         theAreaToKeepTheTurnedOverCards.AddACardToTheBackOfTheHand(drawPile.getOneCardFromTheDrawPile());
-        theAreaToKeepTheTurnedOverCards.DisplayTheCardsInTheHand();
+
     }
 
     public int returnTheNumberOfCoinsThatThePlayerCurrentlyHas()
