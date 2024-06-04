@@ -21,11 +21,7 @@ public class Main {
         DrawPileClass drawPileClassObject = new DrawPileClass();
         HandClass discardPile = new HandClass();
 
-        /*for(int i = 0; i < 6; i++)
-        {
-            GardenBeanClass gardenBean = new GardenBeanClass();
-            drawPileClassObject.addACardToTheDrawPile(gardenBean);
-        }*/
+
 
         for(int i = 0; i < 8; i++)
         {
@@ -67,6 +63,12 @@ public class Main {
         {
             BlueBeanClass blueBean = new BlueBeanClass();
             drawPileClassObject.addACardToTheDrawPile(blueBean);
+        }
+
+        for(int i = 0; i < 6; i++)
+        {
+            GardenBeanClass gardenBean = new GardenBeanClass();
+            drawPileClassObject.addACardToTheDrawPile(gardenBean);
         }
 
         LogicOfTheGame logicOfTheGameObject = new LogicOfTheGame();
