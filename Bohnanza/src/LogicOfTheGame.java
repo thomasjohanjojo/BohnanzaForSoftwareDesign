@@ -59,21 +59,35 @@ public class LogicOfTheGame {
         for(i = 0; i < players.length; i++)
         {
             //Phase 1
+            System.out.println("Phase 1 of Player:" + i+1);
+            System.out.println("The hand of the player is: ");
+            players[i].hand.DisplayTheCardsInTheHand();
             players[i].player.plant(players[i].hand.getTheCardAtTheFrontOfTheHand(), players[i].fieldOne);
+            System.out.println("The cards in the field is: ");
+            players[i].fieldOne.displayAllTheCardsInTheField();
 
             //Phase 2
+            System.out.println("Phase 2 of Player:" + i+1);
             players[i].player.addCardsToTheTurnOverCardsAreaFromTheDrawPileAndTurnThemOver(drawPile,players[i].theAreaToKeepTheTurnedOverCards);
+            System.out.println("The turned over cards: ");
+            players[i].theAreaToKeepTheTurnedOverCards.DisplayTheCardsInTheHand();
 
             //Phase 3
+            System.out.println("Phase 3 of Player:" + i+1);
             players[i].player.harvest(players[i].fieldOne, discardPile);
             players[i].player.plant(players[i].theAreaToKeepTheTurnedOverCards.getTheCardAtTheFrontOfTheHand(), players[i].fieldOne);
             players[i].player.harvest(players[i].fieldTwo, discardPile);
             players[i].player.plant(players[i].theAreaToKeepTheTurnedOverCards.getTheCardAtTheFrontOfTheHand(), players[i].fieldTwo);
+            int coins = players[i].player.returnTheNumberOfCoinsThatThePlayerCurrentlyHas();
+            System.out.println("The number of coins that the player currently has:" + coins);
 
             //Phase 4
+            System.out.println("Phase 4 of Player:" + i+1);
             players[i].player.drawCardsFromTheDrawPileIntoTheHand(drawPile, players[i].hand);
             players[i].player.drawCardsFromTheDrawPileIntoTheHand(drawPile, players[i].hand);
             players[i].player.drawCardsFromTheDrawPileIntoTheHand(drawPile, players[i].hand);
+            System.out.println("The hand of the player is: ");
+            players[i].hand.DisplayTheCardsInTheHand();
         }
     }
 
