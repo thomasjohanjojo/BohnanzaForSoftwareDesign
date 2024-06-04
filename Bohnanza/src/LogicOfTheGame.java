@@ -59,7 +59,7 @@ public class LogicOfTheGame {
         for(i = 0; i < players.length; i++)
         {
             //Phase 1
-            System.out.print("\nPhase 1 of Player:" + (i+1));
+            System.out.print("\n\nPhase 1 of Player:" + (i+1));
             System.out.print("\nThe hand of the player is: ");
             players[i].hand.DisplayTheCardsInTheHand();
             players[i].player.plant(players[i].hand.getTheCardAtTheFrontOfTheHand(), players[i].fieldOne);
