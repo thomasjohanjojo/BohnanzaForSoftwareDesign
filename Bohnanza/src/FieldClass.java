@@ -76,6 +76,7 @@ public class FieldClass implements LogicOfTheGame.Field {
 
     public void displayAllTheCardsInTheField()
     {
+        System.out.println("\n");
         for(int i = 0; i < listOfCardsInTheField.size(); i++)
         {
             System.out.print(" " + listOfCardsInTheField.get(i).returnTheTypeOfTheCard());

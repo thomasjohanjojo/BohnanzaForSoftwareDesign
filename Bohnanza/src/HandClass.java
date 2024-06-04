@@ -28,6 +28,8 @@ public class HandClass implements LogicOfTheGame.Hand {
 
     public void DisplayTheCardsInTheHand()
     {
+        System.out.println("\n");
+
         LogicOfTheGame.Card temporaryHolderObjectForCard;
         for(int i = 0; i < listOfCardsInTheHand.size(); i++)
         {
