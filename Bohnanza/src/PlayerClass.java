@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class PlayerClass  implements LogicOfTheGame.Player
@@ -5,6 +6,11 @@ public class PlayerClass  implements LogicOfTheGame.Player
 
     
     List<LogicOfTheGame.Card> listWhichHoldsTheCardsWhichWereMadeIntoCoins;
+
+    public PlayerClass()
+    {
+        listWhichHoldsTheCardsWhichWereMadeIntoCoins = new ArrayList<>();
+    }
     public void plant(LogicOfTheGame.Card cardsToPlant, LogicOfTheGame.Field fieldOfThePlayerToPlantTheseCards)
     {
         String theCardAboutToBePlanted = cardsToPlant.returnTheTypeOfTheCard();

@@ -1,8 +1,14 @@
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Collections;
 public class HandClass implements LogicOfTheGame.Hand {
 
     List<LogicOfTheGame.Card> listOfCardsInTheHand;
+
+    public HandClass()
+    {
+        listOfCardsInTheHand = new ArrayList<>();
+    }
     public LogicOfTheGame.Card getTheCardAtTheFrontOfTheHand()
     {
         if(listOfCardsInTheHand.size() == 0)

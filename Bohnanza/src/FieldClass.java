@@ -1,9 +1,15 @@
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Collections;
 import java.util.Objects;
 
 public class FieldClass implements LogicOfTheGame.Field {
     List<LogicOfTheGame.Card> listOfCardsInTheField;
+
+    public FieldClass()
+    {
+        listOfCardsInTheField = new ArrayList<>();
+    }
 
     public int getTheTotalCoinsThatCanBeGottenFromThisFieldNow()
     {
