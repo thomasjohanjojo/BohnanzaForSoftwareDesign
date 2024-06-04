@@ -21,11 +21,11 @@ public class Main {
         DrawPileClass drawPileClassObject = new DrawPileClass();
         HandClass discardPile = new HandClass();
 
-        for(int i = 0; i < 6; i++)
+        /*for(int i = 0; i < 6; i++)
         {
             GardenBeanClass gardenBean = new GardenBeanClass();
             drawPileClassObject.addACardToTheDrawPile(gardenBean);
-        }
+        }*/
 
         for(int i = 0; i < 8; i++)
         {
