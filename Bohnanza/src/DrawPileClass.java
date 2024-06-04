@@ -21,6 +21,6 @@ public class DrawPileClass implements LogicOfTheGame.DrawPile
 
     public void addACardToTheDrawPile(LogicOfTheGame.Card cardToBeAddedToTheDrawPile)
     {
-
+        cardsOfTheDrawPile.add(cardToBeAddedToTheDrawPile);
     }
 }
