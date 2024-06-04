@@ -63,7 +63,7 @@ public class LogicOfTheGame {
             System.out.print("\nThe hand of the player is: ");
             players[i].hand.DisplayTheCardsInTheHand();
             players[i].player.plant(players[i].hand.getTheCardAtTheFrontOfTheHand(), players[i].fieldOne);
-            System.out.print("\nThe cards in the field is: ");
+            System.out.print("\nThe cards in field one is: ");
             players[i].fieldOne.displayAllTheCardsInTheField();
             System.out.print("\nThe hand of the Player after Phase 1 is:");
             players[i].hand.DisplayTheCardsInTheHand();
@@ -81,7 +81,7 @@ public class LogicOfTheGame {
             players[i].player.harvest(players[i].fieldTwo, discardPile);
             players[i].player.plant(players[i].theAreaToKeepTheTurnedOverCards.getTheCardAtTheFrontOfTheHand(), players[i].fieldTwo);
             int coins = players[i].player.returnTheNumberOfCoinsThatThePlayerCurrentlyHas();
-            System.out.print("\n The cards in the first field are:");
+            System.out.print("\n The cards in field one are:");
             players[i].fieldOne.displayAllTheCardsInTheField();
             System.out.print("\n The Cards in field two are:");
             players[i].fieldTwo.displayAllTheCardsInTheField();
