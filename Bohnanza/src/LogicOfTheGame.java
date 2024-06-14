@@ -18,11 +18,23 @@ public class LogicOfTheGame {
         int returnTheNumberOfCoinsThatThePlayerCurrentlyHas();
     }
 
+    public interface AreasToKeepTheTurnedOverAndTradedCards
+    {
+        void addACardToTheTurnedOverCardsArea(Card cardToAdd);
+        void addACardToTheTradedCardsArea(Card cardToAdd);
+        Card getACardFromTheTurnedOverCardsArea(int eitherCardOneOrTwo);
+        Card getACardFromTheTradedCards(int indexOfTheCardWhichYouWantToReturn);
+        void displayTheTurnedOverCardsInOrder();
+        void displayTheCardsInTheTradedCardsArea();
+
+    }
+
     public interface Hand
     {
         Card getTheCardAtTheFrontOfTheHand();
         void AddACardToTheBackOfTheHand(Card cardToAddToTheBack);
         void DisplayTheCardsInTheHand();
+        Card getACardFromAnyLocationInTheHand(int indexOfTheLocationOfTheCard);
     }
 
     public interface Field
@@ -107,6 +119,16 @@ public class LogicOfTheGame {
             {
                 players[i].hand.AddACardToTheBackOfTheHand(drawPile.getOneCardFromTheDrawPile());
             }
+        }
+    }
+
+
+    public void theGameLoopWithInputFromPlayers(TheClassWhichHasThePlayerHandAndFields[] players, DrawPile drawPile,Hand discardPile)
+    {
+        int numberOfTimesTheDrawPileHasBeenEmptied = 0;
+        while(numberOfTimesTheDrawPileHasBeenEmptied < 3)
+        {
+
         }
     }
 
