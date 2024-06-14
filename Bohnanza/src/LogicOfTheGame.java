@@ -22,7 +22,7 @@ public class LogicOfTheGame {
     {
         void addACardToTheTurnedOverCardsArea(Card cardToAdd);
         void addACardToTheTradedCardsArea(Card cardToAdd);
-        Card getACardFromTheTurnedOverCardsArea(int eitherCardOneOrTwo);
+        Card getACardFromTheTurnedOverCardsArea(int indexOfTheCardWhichYouWantToReturn);
         Card getACardFromTheTradedCards(int indexOfTheCardWhichYouWantToReturn);
         void displayTheTurnedOverCardsInOrder();
         void displayTheCardsInTheTradedCardsArea();
