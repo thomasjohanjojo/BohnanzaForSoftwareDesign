@@ -37,4 +37,9 @@ public class HandClass implements LogicOfTheGame.Hand {
             System.out.print(" " + temporaryHolderObjectForCard.returnTheTypeOfTheCard() );
         }
     }
+
+    public LogicOfTheGame.Card getACardFromAnyLocationInTheHand(int locationOfTheCard)
+    {
+        return listOfCardsInTheHand.remove(locationOfTheCard - 1);
+    }
 }
