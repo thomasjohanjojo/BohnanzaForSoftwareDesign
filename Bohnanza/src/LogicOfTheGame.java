@@ -22,8 +22,8 @@ public class LogicOfTheGame {
     {
         void addACardToTheTurnedOverCardsArea(Card cardToAdd);
         void addACardToTheTradedCardsArea(Card cardToAdd);
-        Card getACardFromTheTurnedOverCardsArea(int indexOfTheCardWhichYouWantToReturn);
-        Card getACardFromTheTradedCards(int indexOfTheCardWhichYouWantToReturn);
+        Card removeAndReturnATradedAreaCard(int indexOfTheCardWhichYouWantToReturn);
+        Card removeAndReturnATurnedOverAreaCard(int indexOfTheCardWhichYouWantToReturn);
         void displayTheTurnedOverCardsInOrder();
         void displayTheCardsInTheTradedCardsArea();
 
