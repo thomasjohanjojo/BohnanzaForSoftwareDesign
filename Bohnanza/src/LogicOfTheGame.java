@@ -11,9 +11,8 @@ public class LogicOfTheGame {
     {
         void plant(Card cardsToPlant,Field fieldOfThePlayerToPlantTheseCards);
         void harvest(Field aFieldWhichBelongsToThisPlayer, Hand discardPile);
-        void giveACardToTheOtherPlayer(Player playerToTradeTheCardsTo, Card cardToTrade);
-        void getACardFromTheOtherPlayer(Hand handOfThisPlayer, Player player);
         void getACardFromTheTurnedOverAreaOfAnotherPlayer(AreasToKeepTheTurnedOverAndTradedCards turnedOverAreaOfTheOtherPlayer, AreasToKeepTheTurnedOverAndTradedCards tradedCardsAreaOfTheReceivingPlayer);
+        void getACardFromTheHandOfAnotherPlayer(AreasToKeepTheTurnedOverAndTradedCards tradedCardAreaOfThisPlayer, Hand handOfTheOtherPlayer);
         void drawCardsFromTheDrawPileIntoTheHand(DrawPile drawPile, Hand handOfThisPlayer);
         void addCardsToTheTurnOverCardsAreaFromTheDrawPileAndTurnThemOver(DrawPile drawPile, Hand theAreaToKeepTheTurnedOverCards);
         int returnTheNumberOfCoinsThatThePlayerCurrentlyHas();

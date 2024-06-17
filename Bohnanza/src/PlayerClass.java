@@ -108,15 +108,7 @@ public class PlayerClass  implements LogicOfTheGame.Player
 
     }
 
-    public void giveACardToTheOtherPlayer(LogicOfTheGame.Player playerToTradeTheCardsTo, LogicOfTheGame.Card cardToTrade)
-    {
 
-    }
-
-    public void getACardFromTheOtherPlayer(LogicOfTheGame.Hand handOfThisPlayer, LogicOfTheGame.Player player)
-    {
-
-    }
 
     public void drawCardsFromTheDrawPileIntoTheHand(LogicOfTheGame.DrawPile drawPile, LogicOfTheGame.Hand handOfThisPlayer)
     {
@@ -133,6 +125,16 @@ public class PlayerClass  implements LogicOfTheGame.Player
     public int returnTheNumberOfCoinsThatThePlayerCurrentlyHas()
     {
         return listWhichHoldsTheCardsWhichWereMadeIntoCoins.size();
+    }
+
+    public void getACardFromTheTurnedOverAreaOfAnotherPlayer(LogicOfTheGame.AreasToKeepTheTurnedOverAndTradedCards turnedOverCardsArea, LogicOfTheGame.AreasToKeepTheTurnedOverAndTradedCards tradedCardsAreaOfThisPlayer)
+    {
+
+    }
+
+    public void getACardFromTheHandOfAnotherPlayer(LogicOfTheGame.AreasToKeepTheTurnedOverAndTradedCards tradedCardsAreaOfThisPlayer, LogicOfTheGame.Hand handOfTheOtherPlayer)
+    {
+        
     }
 
 
