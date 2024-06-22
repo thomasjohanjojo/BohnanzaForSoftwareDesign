@@ -42,4 +42,14 @@ public class HandClass implements LogicOfTheGame.Hand {
     {
         return listOfCardsInTheHand.remove(locationOfTheCard - 1);
     }
+
+    public int getTheNumberOfCardsInTheHand()
+    {
+        return 0;
+    }
+
+    public boolean isTheHandEmpty()
+    {
+        return true;
+    }
 }
