@@ -300,4 +300,20 @@ public class LogicOfTheGame {
 
     }
 
+    public void plantingTurnedOverAndTradedCards(TheClassWhichHasThePlayerHandAndFields activePlayer, Hand discardPile)
+    {
+       plantingTurnedOverCards(activePlayer, discardPile);
+       plantingTradedCards(activePlayer, discardPile);
+    }
+
+    private void plantingTurnedOverCards(TheClassWhichHasThePlayerHandAndFields activePlayer, Hand discardPile)
+    {
+
+    }
+
+    private void plantingTradedCards(TheClassWhichHasThePlayerHandAndFields activePlayer, Hand discardPile)
+    {
+
+    }
+
 }
