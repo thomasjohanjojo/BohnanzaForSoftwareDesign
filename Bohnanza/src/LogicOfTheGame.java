@@ -195,7 +195,7 @@ public class LogicOfTheGame {
     }
 
 
-    public void phaseOne()
+    public void plantingTheFirstCardAndMaybeAlsoTheSecondCard(TheClassWhichHasThePlayerHandAndFields activePlayer, Hand discardPile)
     {
         
     }
