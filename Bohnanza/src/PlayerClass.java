@@ -11,16 +11,24 @@ public class PlayerClass  implements LogicOfTheGame.Player
     {
         listWhichHoldsTheCardsWhichWereMadeIntoCoins = new ArrayList<>();
     }
-    public void plant(LogicOfTheGame.Card cardsToPlant, LogicOfTheGame.Field fieldOfThePlayerToPlantTheseCards)
+    public void plant(LogicOfTheGame.Card cardsToPlant, LogicOfTheGame.Field fieldOfThePlayerToPlantTheseCards, LogicOfTheGame.Hand discardPile)
     {
         String theCardAboutToBePlanted = cardsToPlant.returnTheTypeOfTheCard();
         String theCardTypeOfTheField = fieldOfThePlayerToPlantTheseCards.getTheTypeOfCardInThisField();
-        if(theCardAboutToBePlanted.equals(theCardTypeOfTheField))
+
+        if(fieldOfThePlayerToPlantTheseCards.getTheNumberOfCardsInThisField() == 0)
         {
             fieldOfThePlayerToPlantTheseCards.addCardsToTheField(cardsToPlant);
         }
-        else if(fieldOfThePlayerToPlantTheseCards.getTheNumberOfCardsInThisField() == 0)
+
+        else if(theCardAboutToBePlanted.equals(theCardTypeOfTheField))
         {
+            fieldOfThePlayerToPlantTheseCards.addCardsToTheField(cardsToPlant);
+        }
+
+        else if(fieldOfThePlayerToPlantTheseCards.getTheNumberOfCardsInThisField() > 0)
+        {
+            harvest(fieldOfThePlayerToPlantTheseCards, discardPile);
             fieldOfThePlayerToPlantTheseCards.addCardsToTheField(cardsToPlant);
         }
     }

@@ -1,3 +1,4 @@
+import java.util.Objects;
 import java.util.Scanner;
 public class LogicOfTheGame {
 
@@ -9,7 +10,7 @@ public class LogicOfTheGame {
 
     public interface Player
     {
-        void plant(Card cardsToPlant,Field fieldOfThePlayerToPlantTheseCards);
+        void plant(Card cardsToPlant,Field fieldOfThePlayerToPlantTheseCards, Hand discardPile);
         void harvest(Field aFieldWhichBelongsToThisPlayer, Hand discardPile);
         void getACardFromTheTurnedOverAreaOfAnotherPlayer(AreasToKeepTheTurnedOverAndTradedCards turnedOverAreaOfTheOtherPlayer, AreasToKeepTheTurnedOverAndTradedCards tradedCardsAreaOfTheReceivingPlayer);
         void getACardFromTheHandOfAnotherPlayer(AreasToKeepTheTurnedOverAndTradedCards tradedCardAreaOfThisPlayer, Hand handOfTheOtherPlayer);
@@ -125,80 +126,123 @@ public class LogicOfTheGame {
     }
 
 
-    public void theGameLoopWithInputFromPlayers(TheClassWhichHasThePlayerHandAndFields[] players, DrawPile drawPile,Hand discardPile)
+//    public void theGameLoopWithInputFromPlayers(TheClassWhichHasThePlayerHandAndFields[] players, DrawPile drawPile,Hand discardPile)
+//    {
+//        Scanner scanner = new Scanner(System.in);
+//
+//
+//        int numberOfTimesTheDrawPileHasBeenEmptied = 0;
+//        while(numberOfTimesTheDrawPileHasBeenEmptied < 3)
+//        {
+//            for(int i = 0; i < 4; i ++)
+//            {
+//                //Phase 1
+//                System.out.print("\n Turn of player:" + i);
+//                System.out.print("\n Phase 1, the card at the front of the hand will be planted now:");
+//                System.out.print("\nThe hand of the player is: ");
+//                players[i].hand.DisplayTheCardsInTheHand();
+//                System.out.print(("\n Select the field which you want to plant it in (1 or 2):"));
+//                int choice = scanner.nextInt();
+//                if(choice == 1)
+//                {
+//                    players[i].player.plant(players[i].hand.getTheCardAtTheFrontOfTheHand(), players[i].fieldOne);
+//                }
+//                else if(choice == 2)
+//                {
+//                    players[i].player.plant(players[i].hand.getTheCardAtTheFrontOfTheHand(), players[i].fieldTwo);
+//                }
+//                System.out.print("\n The card has been planted, the fields are:");
+//                System.out.print("\n Field One:");
+//                players[i].fieldOne.displayAllTheCardsInTheField();
+//                System.out.print("\n Field Two");
+//                players[i].fieldTwo.displayAllTheCardsInTheField();
+//                System.out.print(("\n The hand is now:"));
+//                players[i].hand.DisplayTheCardsInTheHand();
+//                System.out.print("\n Do you want to plant one more card? (1 for yes, 0 for no) ?:");
+//                choice = scanner.nextInt();
+//                if(choice == 1)
+//                {
+//                    System.out.print("Select the field which you want to plant to (1 for field one, 2 for field two):");
+//                    choice = scanner.nextInt();
+//                    if(choice == 1)
+//                    {
+//                        players[i].player.plant(players[i].hand.getTheCardAtTheFrontOfTheHand(), players[i].fieldOne);
+//                        System.out.print("\n The field one is now:");
+//                        players[i].fieldOne.displayAllTheCardsInTheField();
+//                    }
+//                    else if(choice == 2)
+//                    {
+//                        players[i].player.plant(players[i].hand.getTheCardAtTheFrontOfTheHand(), players[i].fieldTwo);
+//                        System.out.print("\n The field two is now:");
+//                        players[i].fieldTwo.displayAllTheCardsInTheField();
+//                    }
+//
+//                }
+//
+//                else if(choice == 0)
+//                {
+//                    System.out.print("Hand after phase 1:");
+//                    players[i].hand.DisplayTheCardsInTheHand();
+//                }
+//                else {
+//                    System.out.print("\n Enter a valid number:");
+//                }
+//
+//
+//
+//
+//            }
+//        }
+//    }
+
+
+    public void plantingTheFirstCardAndMaybeAlsoTheSecondCard(TheClassWhichHasThePlayerHandAndFields activePlayer, Hand discardPile)
     {
         Scanner scanner = new Scanner(System.in);
-
-
-        int numberOfTimesTheDrawPileHasBeenEmptied = 0;
-        while(numberOfTimesTheDrawPileHasBeenEmptied < 3)
+        System.out.print("You must plant a card if you have one");
+        plantingTheCard(activePlayer, discardPile);
+        if(activePlayer.hand.isTheHandEmpty() == false)
         {
-            for(int i = 0; i < 4; i ++)
+            System.out.print("Do you want to plant once more? 1:Yes 0:No");
+            int choice = scanner.nextInt();
+            if(choice < 0 || choice > 1)
             {
-                //Phase 1
-                System.out.print("\n Turn of player:" + i);
-                System.out.print("\n Phase 1, the card at the front of the hand will be planted now:");
-                System.out.print("\nThe hand of the player is: ");
-                players[i].hand.DisplayTheCardsInTheHand();
-                System.out.print(("\n Select the field which you want to plant it in (1 or 2):"));
-                int choice = scanner.nextInt();
-                if(choice == 1)
-                {
-                    players[i].player.plant(players[i].hand.getTheCardAtTheFrontOfTheHand(), players[i].fieldOne);
-                }
-                else if(choice == 2)
-                {
-                    players[i].player.plant(players[i].hand.getTheCardAtTheFrontOfTheHand(), players[i].fieldTwo);
-                }
-                System.out.print("\n The card has been planted, the fields are:");
-                System.out.print("\n Field One:");
-                players[i].fieldOne.displayAllTheCardsInTheField();
-                System.out.print("\n Field Two");
-                players[i].fieldTwo.displayAllTheCardsInTheField();
-                System.out.print(("\n The hand is now:"));
-                players[i].hand.DisplayTheCardsInTheHand();
-                System.out.print("\n Do you want to plant one more card? (1 for yes, 0 for no) ?:");
-                choice = scanner.nextInt();
-                if(choice == 1)
-                {
-                    System.out.print("Select the field which you want to plant to (1 for field one, 2 for field two):");
-                    choice = scanner.nextInt();
-                    if(choice == 1)
-                    {
-                        players[i].player.plant(players[i].hand.getTheCardAtTheFrontOfTheHand(), players[i].fieldOne);
-                        System.out.print("\n The field one is now:");
-                        players[i].fieldOne.displayAllTheCardsInTheField();
-                    }
-                    else if(choice == 2)
-                    {
-                        players[i].player.plant(players[i].hand.getTheCardAtTheFrontOfTheHand(), players[i].fieldTwo);
-                        System.out.print("\n The field two is now:");
-                        players[i].fieldTwo.displayAllTheCardsInTheField();
-                    }
+                System.out.print("Wrong Choice, Do again");
+                return;
+            }
+            plantingTheCard(activePlayer, discardPile);
+        }
+    }
 
-                }
+    private void plantingTheCard(TheClassWhichHasThePlayerHandAndFields activePlayer, Hand discardPile)
+    {
 
-                else if(choice == 0)
-                {
-                    System.out.print("Hand after phase 1:");
-                    players[i].hand.DisplayTheCardsInTheHand();
-                }
-                else {
-                    System.out.print("\n Enter a valid number:");
-                }
+        Scanner scanner = new Scanner(System.in);
+        if(activePlayer.hand.isTheHandEmpty() == false)
+        {
+            activePlayer.hand.DisplayTheCardsInTheHand();
+            Card cardToPlant = activePlayer.hand.getTheCardAtTheFrontOfTheHand();
+            System.out.print("\n To Which field do you want to plant 1:Field One  2: Field Two?");
+            int fieldToPlantTheCardIn = scanner.nextInt();
+            if(fieldToPlantTheCardIn < 1 || fieldToPlantTheCardIn > 2)
+            {
+                System.out.print("\n Wrong input, do again");
+                return;
+            }
 
+            if(fieldToPlantTheCardIn == 1)
+            {
+                activePlayer.player.plant(cardToPlant, activePlayer.fieldOne, discardPile);
+            }
 
-
-
+            else if(fieldToPlantTheCardIn == 2)
+            {
+                activePlayer.player.plant(cardToPlant, activePlayer.fieldTwo, discardPile);
             }
         }
     }
 
 
-    public void plantingTheFirstCardAndMaybeAlsoTheSecondCard(TheClassWhichHasThePlayerHandAndFields activePlayer, Hand discardPile)
-    {
-        
-    }
 
     public void tradingPhase(int theIndexOfTheCurrentlyActivePlayerInThePlayersArray, TheClassWhichHasThePlayerHandAndFields[] players, DrawPile drawPile,Hand discardPile)
     {
