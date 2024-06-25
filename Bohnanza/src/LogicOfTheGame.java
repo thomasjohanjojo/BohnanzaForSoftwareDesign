@@ -27,6 +27,8 @@ public class LogicOfTheGame {
         Card removeAndReturnATurnedOverAreaCard(int indexOfTheCardWhichYouWantToReturn);
         void displayTheTurnedOverCardsInOrder();
         void displayTheCardsInTheTradedCardsArea();
+        int returnTheNumberOfTurnedOverCardsInTheTurnedOverCardsArea();
+        int returnTheNumberOfTradedCardsInTheTradedCardsArea();
 
     }
 
@@ -352,7 +354,10 @@ public class LogicOfTheGame {
 
     private void plantingTurnedOverCards(TheClassWhichHasThePlayerHandAndFields activePlayer, Hand discardPile)
     {
-
+        if(activePlayer.theAreaToKeepTheTurnedOverAndTradedCards.returnTheNumberOfTurnedOverCardsInTheTurnedOverCardsArea() > 0)
+        {
+            //Plant the card in either field after getting input from the user about which field it needs to be
+        }
     }
 
     private void plantingTradedCards(TheClassWhichHasThePlayerHandAndFields activePlayer, Hand discardPile)
