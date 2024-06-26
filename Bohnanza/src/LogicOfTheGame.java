@@ -354,15 +354,66 @@ public class LogicOfTheGame {
 
     private void plantingTurnedOverCards(TheClassWhichHasThePlayerHandAndFields activePlayer, Hand discardPile)
     {
+        Scanner scanner = new Scanner(System.in);
         if(activePlayer.theAreaToKeepTheTurnedOverAndTradedCards.returnTheNumberOfTurnedOverCardsInTheTurnedOverCardsArea() > 0)
         {
-            //Plant the card in either field after getting input from the user about which field it needs to be
+            activePlayer.theAreaToKeepTheTurnedOverAndTradedCards.displayTheTurnedOverCardsInOrder();
+            for(int i = 0; i < activePlayer.theAreaToKeepTheTurnedOverAndTradedCards.returnTheNumberOfTurnedOverCardsInTheTurnedOverCardsArea(); i++)
+            {
+                System.out.print("\n In which field do you want to plant the card? 1: Field One 2: Field Two");
+                int choiceOfField = scanner.nextInt();
+                if(choiceOfField < 1 || choiceOfField > 2)
+                {
+                    System.out.print("\n Wrong input, do again");
+                    return;
+                }
+
+
+                if(choiceOfField == 1)
+                {
+                   Card cardToPlant = activePlayer.theAreaToKeepTheTurnedOverAndTradedCards.removeAndReturnATurnedOverAreaCard(0);
+                   activePlayer.player.plant(cardToPlant, activePlayer.fieldOne, discardPile);
+                }
+
+                else if(choiceOfField == 2)
+                {
+                    Card cardToPlant = activePlayer.theAreaToKeepTheTurnedOverAndTradedCards.removeAndReturnATurnedOverAreaCard(0);
+                    activePlayer.player.plant(cardToPlant, activePlayer.fieldTwo, discardPile);
+                }
+            }
         }
     }
 
     private void plantingTradedCards(TheClassWhichHasThePlayerHandAndFields activePlayer, Hand discardPile)
     {
+        Scanner scanner = new Scanner(System.in);
+        if(activePlayer.theAreaToKeepTheTurnedOverAndTradedCards.returnTheNumberOfTradedCardsInTheTradedCardsArea() > 0)
+        {
+            activePlayer.theAreaToKeepTheTurnedOverAndTradedCards.displayTheCardsInTheTradedCardsArea();
+            for(int i = 0; i < activePlayer.theAreaToKeepTheTurnedOverAndTradedCards.returnTheNumberOfTradedCardsInTheTradedCardsArea(); i++)
+            {
+                System.out.print("\n In which field do you want to plant the card? 1: Field One 2: Field Two");
+                int choiceOfField = scanner.nextInt();
+                if(choiceOfField < 1 || choiceOfField > 2)
+                {
+                    System.out.print("\n Wrong input, do again");
+                    return;
+                }
 
+
+                if(choiceOfField == 1)
+                {
+                    Card cardToPlant = activePlayer.theAreaToKeepTheTurnedOverAndTradedCards.removeAndReturnATradedAreaCard(0);
+                    activePlayer.player.plant(cardToPlant, activePlayer.fieldOne, discardPile);
+                }
+
+                else if(choiceOfField == 2)
+                {
+                    Card cardToPlant = activePlayer.theAreaToKeepTheTurnedOverAndTradedCards.removeAndReturnATradedAreaCard(0);
+                    activePlayer.player.plant(cardToPlant, activePlayer.fieldTwo, discardPile);
+                }
+            }
+        }
     }
 
 }
