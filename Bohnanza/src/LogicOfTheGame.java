@@ -232,18 +232,49 @@ public class LogicOfTheGame {
                 return;
             }
 
+
+
             if(fieldToPlantTheCardIn == 1)
             {
-                activePlayer.player.plant(cardToPlant, activePlayer.fieldOne, discardPile);
+                if(canYouHarvestThisField(activePlayer.fieldOne, activePlayer.fieldTwo) == true)
+                {
+                    activePlayer.player.plant(cardToPlant, activePlayer.fieldOne, discardPile);
+                }
+
+                else
+                {
+                    System.out.print("\nBean protection rule, try again");
+                }
             }
 
             else if(fieldToPlantTheCardIn == 2)
             {
-                activePlayer.player.plant(cardToPlant, activePlayer.fieldTwo, discardPile);
+                if(canYouHarvestThisField(activePlayer.fieldTwo, activePlayer.fieldOne) == true)
+                {
+                    activePlayer.player.plant(cardToPlant, activePlayer.fieldTwo, discardPile);
+                }
+
+                else
+                {
+                    System.out.print("\n Bean protection rule, try again");
+                }
             }
         }
     }
 
+    private boolean canYouHarvestThisField(Field fieldToHarvest, Field fieldToCheckWith)
+    {
+        int numberOfBeansInFieldToHarvest = fieldToHarvest.getTheNumberOfCardsInThisField();
+        int numberOfBeansInFieldToCheckWith = fieldToCheckWith.getTheNumberOfCardsInThisField();
+        if(numberOfBeansInFieldToHarvest == 1 && (numberOfBeansInFieldToCheckWith > 1))
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
 
 
     public void tradingPhase(int theIndexOfTheCurrentlyActivePlayerInThePlayersArray, TheClassWhichHasThePlayerHandAndFields[] players, DrawPile drawPile,Hand discardPile)
