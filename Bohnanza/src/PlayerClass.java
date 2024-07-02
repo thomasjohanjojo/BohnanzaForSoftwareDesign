@@ -120,13 +120,21 @@ public class PlayerClass  implements LogicOfTheGame.Player
 
     public void drawCardsFromTheDrawPileIntoTheHand(LogicOfTheGame.DrawPile drawPile, LogicOfTheGame.Hand handOfThisPlayer)
     {
-        handOfThisPlayer.AddACardToTheBackOfTheHand(drawPile.getOneCardFromTheDrawPile());
+        if(drawPile.isDrawPileEmpty() == false)
+        {
+            handOfThisPlayer.AddACardToTheBackOfTheHand(drawPile.getOneCardFromTheDrawPile());
+        }
     }
 
-    public void addCardsToTheTurnOverCardsAreaFromTheDrawPileAndTurnThemOver(LogicOfTheGame.DrawPile drawPile, LogicOfTheGame.Hand theAreaToKeepTheTurnedOverCards)
+    public void addTwoCardsToTheTurnOverCardsAreaFromTheDrawPileAndTurnThemOver(LogicOfTheGame.DrawPile drawPile, LogicOfTheGame.AreasToKeepTheTurnedOverAndTradedCards areaToKeepTheTurnedOverCards)
     {
-        theAreaToKeepTheTurnedOverCards.AddACardToTheBackOfTheHand(drawPile.getOneCardFromTheDrawPile());
-        theAreaToKeepTheTurnedOverCards.AddACardToTheBackOfTheHand(drawPile.getOneCardFromTheDrawPile());
+        for(int i = 0; i < 2; i++)
+        {
+            if(drawPile.isDrawPileEmpty() == false)
+            {
+                areaToKeepTheTurnedOverCards.addACardToTheTurnedOverCardsArea(drawPile.getOneCardFromTheDrawPile());
+            }
+        }
 
     }
 
@@ -135,15 +143,9 @@ public class PlayerClass  implements LogicOfTheGame.Player
         return listWhichHoldsTheCardsWhichWereMadeIntoCoins.size();
     }
 
-    public void getACardFromTheTurnedOverAreaOfAnotherPlayer(LogicOfTheGame.AreasToKeepTheTurnedOverAndTradedCards turnedOverCardsArea, LogicOfTheGame.AreasToKeepTheTurnedOverAndTradedCards tradedCardsAreaOfThisPlayer)
-    {
 
-    }
 
-    public void getACardFromTheHandOfAnotherPlayer(LogicOfTheGame.AreasToKeepTheTurnedOverAndTradedCards tradedCardsAreaOfThisPlayer, LogicOfTheGame.Hand handOfTheOtherPlayer)
-    {
-        
-    }
+
 
 
 
