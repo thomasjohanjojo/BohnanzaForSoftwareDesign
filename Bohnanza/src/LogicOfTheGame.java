@@ -98,7 +98,7 @@ public class LogicOfTheGame {
         }
     }
 
-    public void HarvestAllTheFieldsOfAllThePlayers(TheClassWhichHasThePlayerHandAndFields[] players, Hand discardPile)
+    private void HarvestAllTheFieldsOfAllThePlayers(TheClassWhichHasThePlayerHandAndFields[] players, Hand discardPile)
     {
         for(int i = 0; i < players.length; i ++)
         {
@@ -107,7 +107,7 @@ public class LogicOfTheGame {
         }
     }
 
-    public void transferCardsFromTheDiscardPileToTheDrawPileAndShuffleTheDrawPile(DrawPile drawPile, Hand discardPile)
+    private void transferCardsFromTheDiscardPileToTheDrawPileAndShuffleTheDrawPile(DrawPile drawPile, Hand discardPile)
     {
 
         while (discardPile.isTheHandEmpty() == false)
@@ -133,7 +133,7 @@ public class LogicOfTheGame {
         }
     }
 
-    public void DrawThreeCards(TheClassWhichHasThePlayerHandAndFields activePlayer, DrawPile drawPile)
+    private void DrawThreeCards(TheClassWhichHasThePlayerHandAndFields activePlayer, DrawPile drawPile)
     {
         for(int i = 0; i < 3; i++) {
             activePlayer.player.drawCardsFromTheDrawPileIntoTheHand(drawPile, activePlayer.hand);
@@ -144,7 +144,7 @@ public class LogicOfTheGame {
 
 
 
-    public void plantingTheFirstCardAndMaybeAlsoTheSecondCard(TheClassWhichHasThePlayerHandAndFields activePlayer, Hand discardPile)
+    private void plantingTheFirstCardAndMaybeAlsoTheSecondCard(TheClassWhichHasThePlayerHandAndFields activePlayer, Hand discardPile)
     {
         Scanner scanner = new Scanner(System.in);
         System.out.print("You must plant a card if you have one");
@@ -222,13 +222,13 @@ public class LogicOfTheGame {
         }
     }
 
-    public void gettingTurnedOverCards(TheClassWhichHasThePlayerHandAndFields activePlayer,DrawPile drawPile, Hand discardPile)
+    private void gettingTurnedOverCards(TheClassWhichHasThePlayerHandAndFields activePlayer,DrawPile drawPile, Hand discardPile)
     {
         activePlayer.player.addTwoCardsToTheTurnOverCardsAreaFromTheDrawPileAndTurnThemOver(drawPile, activePlayer.theAreaToKeepTheTurnedOverAndTradedCards);
     }
 
 
-    public void tradingPhase(int theIndexOfTheCurrentlyActivePlayerInThePlayersArray, TheClassWhichHasThePlayerHandAndFields[] players, DrawPile drawPile,Hand discardPile)
+    private void tradingPhase(int theIndexOfTheCurrentlyActivePlayerInThePlayersArray, TheClassWhichHasThePlayerHandAndFields[] players, DrawPile drawPile,Hand discardPile)
     {
         Scanner scanner = new Scanner(System.in);
 
@@ -328,7 +328,7 @@ public class LogicOfTheGame {
 
     }
 
-    public void plantingTurnedOverAndTradedCards(TheClassWhichHasThePlayerHandAndFields activePlayer,TheClassWhichHasThePlayerHandAndFields players[], Hand discardPile)
+    private void plantingTurnedOverAndTradedCards(TheClassWhichHasThePlayerHandAndFields activePlayer,TheClassWhichHasThePlayerHandAndFields players[], Hand discardPile)
     {
         plantingTurnedOverCards(activePlayer, discardPile);
         for(int i = 0; i < players.length; i++)
