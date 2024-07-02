@@ -6,6 +6,7 @@ public class LogicOfTheGame {
         void addACardToTheDrawPile(Card cardToBeAddedToTheDrawPile);
         Card getOneCardFromTheDrawPile();
         boolean isDrawPileEmpty();
+        void shuffleTheDrawPile();
     }
 
     public interface Player
@@ -79,10 +80,41 @@ public class LogicOfTheGame {
             if(drawPile.isDrawPileEmpty() == true)
             {
                 i++;
+                transferCardsFromTheDiscardPileToTheDrawPileAndShuffleTheDrawPile(drawPile, discardPile);
             }
 
         }
 
+        HarvestAllTheFieldsOfAllThePlayers(players, discardPile);
+        showTheScoresOfAllThePlayers(players);
+
+    }
+
+    private void showTheScoresOfAllThePlayers(TheClassWhichHasThePlayerHandAndFields[] players)
+    {
+        for(int i = 0; i < players.length; i++)
+        {
+            System.out.print("\n Coins of Player:" + i + " is:" + players[i].player.returnTheNumberOfCoinsThatThePlayerCurrentlyHas());
+        }
+    }
+
+    public void HarvestAllTheFieldsOfAllThePlayers(TheClassWhichHasThePlayerHandAndFields[] players, Hand discardPile)
+    {
+        for(int i = 0; i < players.length; i ++)
+        {
+            players[i].player.harvest(players[i].fieldOne, discardPile);
+            players[i].player.harvest(players[i].fieldTwo, discardPile);
+        }
+    }
+
+    public void transferCardsFromTheDiscardPileToTheDrawPileAndShuffleTheDrawPile(DrawPile drawPile, Hand discardPile)
+    {
+
+        while (discardPile.isTheHandEmpty() == false)
+        {
+            drawPile.addACardToTheDrawPile(discardPile.getTheCardAtTheFrontOfTheHand());
+        }
+        drawPile.shuffleTheDrawPile();
 
     }
 
@@ -312,7 +344,7 @@ public class LogicOfTheGame {
         if(activePlayer.theAreaToKeepTheTurnedOverAndTradedCards.returnTheNumberOfTurnedOverCardsInTheTurnedOverCardsArea() > 0)
         {
             activePlayer.theAreaToKeepTheTurnedOverAndTradedCards.displayTheTurnedOverCardsInOrder();
-            for(int i = 0; i < activePlayer.theAreaToKeepTheTurnedOverAndTradedCards.returnTheNumberOfTurnedOverCardsInTheTurnedOverCardsArea(); i++)
+            while(activePlayer.theAreaToKeepTheTurnedOverAndTradedCards.returnTheNumberOfTurnedOverCardsInTheTurnedOverCardsArea() != 0)
             {
                 System.out.print("\n In which field do you want to plant the card? 1: Field One 2: Field Two");
                 int choiceOfField = scanner.nextInt();
@@ -344,7 +376,7 @@ public class LogicOfTheGame {
         if(activePlayer.theAreaToKeepTheTurnedOverAndTradedCards.returnTheNumberOfTradedCardsInTheTradedCardsArea() > 0)
         {
             activePlayer.theAreaToKeepTheTurnedOverAndTradedCards.displayTheCardsInTheTradedCardsArea();
-            for(int i = 0; i < activePlayer.theAreaToKeepTheTurnedOverAndTradedCards.returnTheNumberOfTradedCardsInTheTradedCardsArea(); i++)
+            while(activePlayer.theAreaToKeepTheTurnedOverAndTradedCards.returnTheNumberOfTradedCardsInTheTradedCardsArea() != 0)
             {
                 System.out.print("\n In which field do you want to plant the card? 1: Field One 2: Field Two");
                 int choiceOfField = scanner.nextInt();
