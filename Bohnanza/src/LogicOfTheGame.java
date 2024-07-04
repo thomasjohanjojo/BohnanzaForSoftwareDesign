@@ -104,6 +104,11 @@ public class LogicOfTheGame {
         {
             players[i].player.harvest(players[i].fieldOne, discardPile);
             players[i].player.harvest(players[i].fieldTwo, discardPile);
+
+            if(players[i].isTheThirdFieldAvailable == true)
+            {
+                players[i].player.harvest(players[i].fieldThree, discardPile);
+            }
         }
     }
 
@@ -148,7 +153,14 @@ public class LogicOfTheGame {
     {
         Scanner scanner = new Scanner(System.in);
         System.out.print("You must plant a card if you have one");
-        plantingTheCard(activePlayer, discardPile);
+
+        if(activePlayer.hand.isTheHandEmpty() == false)
+        {
+            activePlayer.hand.DisplayTheCardsInTheHand();
+            Card cardToPlant = activePlayer.hand.getTheCardAtTheFrontOfTheHand();
+            plantTheCard(activePlayer, discardPile, cardToPlant);
+        }
+
         if(activePlayer.hand.isTheHandEmpty() == false)
         {
             System.out.print("Do you want to plant once more? 1:Yes 0:No");
@@ -158,52 +170,107 @@ public class LogicOfTheGame {
                 System.out.print("Wrong Choice, Do again");
                 return;
             }
-            plantingTheCard(activePlayer, discardPile);
+            else
+            {
+                activePlayer.hand.DisplayTheCardsInTheHand();
+                Card cardToPlant = activePlayer.hand.getTheCardAtTheFrontOfTheHand();
+                plantTheCard(activePlayer, discardPile, cardToPlant);
+            }
         }
     }
 
-    private void plantingTheCard(TheClassWhichHasThePlayerHandAndFields activePlayer, Hand discardPile)
-    {
 
+
+    private void plantTheCard(TheClassWhichHasThePlayerHandAndFields activePlayer, Hand discardPile, Card cardToPlant)
+    {
         Scanner scanner = new Scanner(System.in);
-        if(activePlayer.hand.isTheHandEmpty() == false)
+        int fieldToPlantTheCardIn = 1;
+        if(activePlayer.isTheThirdFieldAvailable == false)
         {
-            activePlayer.hand.DisplayTheCardsInTheHand();
-            Card cardToPlant = activePlayer.hand.getTheCardAtTheFrontOfTheHand();
-            System.out.print("\n To Which field do you want to plant 1:Field One  2: Field Two?");
-            int fieldToPlantTheCardIn = scanner.nextInt();
+            System.out.print("\n To Which field do you want to plant 1:Field One  2: Field Two?:");
+            fieldToPlantTheCardIn = scanner.nextInt();
             if(fieldToPlantTheCardIn < 1 || fieldToPlantTheCardIn > 2)
             {
                 System.out.print("\n Wrong input, do again");
                 return;
             }
-
-
-
-            if(fieldToPlantTheCardIn == 1)
+        }
+        else if(activePlayer.isTheThirdFieldAvailable == true)
+        {
+            System.out.print("\n To Which field do you want to plant 1:Field One 2:Field Two 3:Field Three?:");
+            fieldToPlantTheCardIn = scanner.nextInt();
+            if(fieldToPlantTheCardIn < 1 || fieldToPlantTheCardIn > 3)
             {
-                if(canYouHarvestThisField(activePlayer.fieldOne, activePlayer.fieldTwo) == true)
+                System.out.print("\n Wrong input, do again");
+                return;
+            }
+        }
+
+
+        if(fieldToPlantTheCardIn == 1)
+        {
+
+            if(activePlayer.isTheThirdFieldAvailable == false)
+            {
+                if (canYouHarvestThisField(activePlayer.fieldOne, activePlayer.fieldTwo) == true)
                 {
                     activePlayer.player.plant(cardToPlant, activePlayer.fieldOne, discardPile);
                 }
-
-                else
-                {
-                    System.out.print("\nBean protection rule, try again");
-                }
-            }
-
-            else if(fieldToPlantTheCardIn == 2)
-            {
-                if(canYouHarvestThisField(activePlayer.fieldTwo, activePlayer.fieldOne) == true)
-                {
-                    activePlayer.player.plant(cardToPlant, activePlayer.fieldTwo, discardPile);
-                }
-
                 else
                 {
                     System.out.print("\n Bean protection rule, try again");
                 }
+            }
+
+            else if(activePlayer.isTheThirdFieldAvailable == true)
+            {
+                if(canYouHarvestThisField(activePlayer.fieldOne, activePlayer.fieldTwo) == true && canYouHarvestThisField(activePlayer.fieldOne, activePlayer.fieldThree))
+                {
+                    activePlayer.player.plant(cardToPlant, activePlayer.fieldOne, discardPile);
+                }
+                else
+                {
+                    System.out.print("\n Bean protection rule, try again");
+                }
+            }
+        }
+
+        else if(fieldToPlantTheCardIn == 2)
+        {
+            if(activePlayer.isTheThirdFieldAvailable == false)
+            {
+                if (canYouHarvestThisField(activePlayer.fieldTwo, activePlayer.fieldOne) == true)
+                {
+                    activePlayer.player.plant(cardToPlant, activePlayer.fieldTwo, discardPile);
+                }
+                else
+                {
+                    System.out.print("\n Bean protection rule, try again");
+                }
+            }
+            else if(activePlayer.isTheThirdFieldAvailable == true)
+            {
+                if(canYouHarvestThisField(activePlayer.fieldTwo, activePlayer.fieldOne) == true && canYouHarvestThisField(activePlayer.fieldTwo, activePlayer.fieldThree) == true)
+                {
+                    activePlayer.player.plant(cardToPlant, activePlayer.fieldTwo, discardPile);
+                }
+                else
+                {
+                    System.out.print("\n Bean protection rule, try again");
+                }
+            }
+        }
+
+        else if(fieldToPlantTheCardIn == 3)
+        {
+            if(canYouHarvestThisField(activePlayer.fieldThree, activePlayer.fieldOne) == true && canYouHarvestThisField(activePlayer.fieldThree, activePlayer.fieldTwo) == true)
+            {
+                activePlayer.player.plant(cardToPlant, activePlayer.fieldThree, discardPile);
+            }
+
+            else
+            {
+                System.out.print("\n Bean protection rule, try again");
             }
         }
     }
@@ -346,26 +413,8 @@ public class LogicOfTheGame {
             activePlayer.theAreaToKeepTheTurnedOverAndTradedCards.displayTheTurnedOverCardsInOrder();
             while(activePlayer.theAreaToKeepTheTurnedOverAndTradedCards.returnTheNumberOfTurnedOverCardsInTheTurnedOverCardsArea() != 0)
             {
-                System.out.print("\n In which field do you want to plant the card? 1: Field One 2: Field Two");
-                int choiceOfField = scanner.nextInt();
-                if(choiceOfField < 1 || choiceOfField > 2)
-                {
-                    System.out.print("\n Wrong input, do again");
-                    return;
-                }
-
-
-                if(choiceOfField == 1 && canYouHarvestThisField(activePlayer.fieldOne, activePlayer.fieldTwo))
-                {
-                   Card cardToPlant = activePlayer.theAreaToKeepTheTurnedOverAndTradedCards.removeAndReturnATurnedOverAreaCard(0);
-                   activePlayer.player.plant(cardToPlant, activePlayer.fieldOne, discardPile);
-                }
-
-                else if(choiceOfField == 2 && canYouHarvestThisField(activePlayer.fieldTwo, activePlayer.fieldOne))
-                {
-                    Card cardToPlant = activePlayer.theAreaToKeepTheTurnedOverAndTradedCards.removeAndReturnATurnedOverAreaCard(0);
-                    activePlayer.player.plant(cardToPlant, activePlayer.fieldTwo, discardPile);
-                }
+               Card cardToPlant = activePlayer.theAreaToKeepTheTurnedOverAndTradedCards.removeAndReturnATurnedOverAreaCard(0);
+               plantTheCard(activePlayer,discardPile, cardToPlant);
             }
         }
     }
@@ -378,26 +427,8 @@ public class LogicOfTheGame {
             activePlayer.theAreaToKeepTheTurnedOverAndTradedCards.displayTheCardsInTheTradedCardsArea();
             while(activePlayer.theAreaToKeepTheTurnedOverAndTradedCards.returnTheNumberOfTradedCardsInTheTradedCardsArea() != 0)
             {
-                System.out.print("\n In which field do you want to plant the card? 1: Field One 2: Field Two");
-                int choiceOfField = scanner.nextInt();
-                if(choiceOfField < 1 || choiceOfField > 2)
-                {
-                    System.out.print("\n Wrong input, do again");
-                    return;
-                }
-
-
-                if(choiceOfField == 1 && canYouHarvestThisField(activePlayer.fieldOne, activePlayer.fieldTwo))
-                {
-                    Card cardToPlant = activePlayer.theAreaToKeepTheTurnedOverAndTradedCards.removeAndReturnATradedAreaCard(0);
-                    activePlayer.player.plant(cardToPlant, activePlayer.fieldOne, discardPile);
-                }
-
-                else if(choiceOfField == 2 && canYouHarvestThisField(activePlayer.fieldTwo, activePlayer.fieldOne))
-                {
-                    Card cardToPlant = activePlayer.theAreaToKeepTheTurnedOverAndTradedCards.removeAndReturnATradedAreaCard(0);
-                    activePlayer.player.plant(cardToPlant, activePlayer.fieldTwo, discardPile);
-                }
+                Card cardToPlant = activePlayer.theAreaToKeepTheTurnedOverAndTradedCards.removeAndReturnATradedAreaCard(0);
+                plantTheCard(activePlayer, discardPile, cardToPlant);
             }
         }
     }
