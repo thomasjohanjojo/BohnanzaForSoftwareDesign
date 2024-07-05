@@ -39,6 +39,7 @@ public class LogicOfTheGame {
         Card getACardFromAnyLocationInTheHand(int indexOfTheLocationOfTheCard);
         boolean isTheHandEmpty();
         int getTheNumberOfCardsInTheHand();
+        String getTheTypeOfCardInFrontOfTheHand();
     }
 
     public interface Field
@@ -149,7 +150,7 @@ public class LogicOfTheGame {
 
 
 
-    private void plantingTheFirstCardAndMaybeAlsoTheSecondCard(TheClassWhichHasThePlayerHandAndFields activePlayer, Hand discardPile)
+    protected void plantingTheFirstCardAndMaybeAlsoTheSecondCard(TheClassWhichHasThePlayerHandAndFields activePlayer, Hand discardPile)
     {
         Scanner scanner = new Scanner(System.in);
         System.out.print("You must plant a card if you have one");
@@ -181,7 +182,7 @@ public class LogicOfTheGame {
 
 
 
-    private void plantTheCard(TheClassWhichHasThePlayerHandAndFields activePlayer, Hand discardPile, Card cardToPlant)
+    protected void plantTheCard(TheClassWhichHasThePlayerHandAndFields activePlayer, Hand discardPile, Card cardToPlant)
     {
         Scanner scanner = new Scanner(System.in);
         int fieldToPlantTheCardIn = 1;
@@ -275,7 +276,7 @@ public class LogicOfTheGame {
         }
     }
 
-    private boolean canYouHarvestThisField(Field fieldToHarvest, Field fieldToCheckWith)
+    protected boolean canYouHarvestThisField(Field fieldToHarvest, Field fieldToCheckWith)
     {
         int numberOfBeansInFieldToHarvest = fieldToHarvest.getTheNumberOfCardsInThisField();
         int numberOfBeansInFieldToCheckWith = fieldToCheckWith.getTheNumberOfCardsInThisField();
@@ -289,13 +290,13 @@ public class LogicOfTheGame {
         }
     }
 
-    private void gettingTurnedOverCards(TheClassWhichHasThePlayerHandAndFields activePlayer,DrawPile drawPile, Hand discardPile)
+    protected void gettingTurnedOverCards(TheClassWhichHasThePlayerHandAndFields activePlayer,DrawPile drawPile, Hand discardPile)
     {
         activePlayer.player.addTwoCardsToTheTurnOverCardsAreaFromTheDrawPileAndTurnThemOver(drawPile, activePlayer.theAreaToKeepTheTurnedOverAndTradedCards);
     }
 
 
-    private void tradingPhase(int theIndexOfTheCurrentlyActivePlayerInThePlayersArray, TheClassWhichHasThePlayerHandAndFields[] players, DrawPile drawPile,Hand discardPile)
+    protected void tradingPhase(int theIndexOfTheCurrentlyActivePlayerInThePlayersArray, TheClassWhichHasThePlayerHandAndFields[] players, DrawPile drawPile,Hand discardPile)
     {
         Scanner scanner = new Scanner(System.in);
 
@@ -395,7 +396,7 @@ public class LogicOfTheGame {
 
     }
 
-    private void plantingTurnedOverAndTradedCards(TheClassWhichHasThePlayerHandAndFields activePlayer,TheClassWhichHasThePlayerHandAndFields players[], Hand discardPile)
+    protected void plantingTurnedOverAndTradedCards(TheClassWhichHasThePlayerHandAndFields activePlayer,TheClassWhichHasThePlayerHandAndFields players[], Hand discardPile)
     {
         plantingTurnedOverCards(activePlayer, discardPile);
         for(int i = 0; i < players.length; i++)
@@ -405,7 +406,7 @@ public class LogicOfTheGame {
 
     }
 
-    private void plantingTurnedOverCards(TheClassWhichHasThePlayerHandAndFields activePlayer, Hand discardPile)
+    protected void plantingTurnedOverCards(TheClassWhichHasThePlayerHandAndFields activePlayer, Hand discardPile)
     {
         Scanner scanner = new Scanner(System.in);
         if(activePlayer.theAreaToKeepTheTurnedOverAndTradedCards.returnTheNumberOfTurnedOverCardsInTheTurnedOverCardsArea() > 0)
@@ -419,7 +420,7 @@ public class LogicOfTheGame {
         }
     }
 
-    private void plantingTradedCards(TheClassWhichHasThePlayerHandAndFields activePlayer, Hand discardPile)
+    protected void plantingTradedCards(TheClassWhichHasThePlayerHandAndFields activePlayer, Hand discardPile)
     {
         Scanner scanner = new Scanner(System.in);
         if(activePlayer.theAreaToKeepTheTurnedOverAndTradedCards.returnTheNumberOfTradedCardsInTheTradedCardsArea() > 0)
