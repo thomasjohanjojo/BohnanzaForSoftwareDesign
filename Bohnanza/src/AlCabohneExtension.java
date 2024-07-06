@@ -163,10 +163,14 @@ public class AlCabohneExtension extends LogicOfTheGame  {
         {
             System.out.print("\n How many cards do you want to plant from the revealed cards?:");
             int numberOfCardsToPlant = scanner.nextInt();
+            if(numberOfCardsToPlant > thePlaceToKeepTheRevealedCards.returnTheTotalNumberOfCardsInAllTheSlots())
+            {
+                throw new InvalidInputException("You have input the wrong number of cards to plant from the revealed cards");
+            }
             for(int i = 0; i < numberOfCardsToPlant; i++)
             {
                 int slotToTakeTheCardFrom;
-                System.out.print("\n From which slot do you want to take the card?:");
+                System.out.print("\n From which slot do you want to take the card?: 1,2,3");
                 slotToTakeTheCardFrom = scanner.nextInt();
                 Card cardToPlant = removeACardFromARevealedCardSlotAndReturnIt(slotToTakeTheCardFrom, thePlaceToKeepTheRevealedCards);
                 System.out.print("\n Where do you want to plant the card? 1.Your Fields  2.Bosses' Fields:");
