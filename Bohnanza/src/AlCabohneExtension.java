@@ -7,6 +7,37 @@ public class AlCabohneExtension extends LogicOfTheGame  {
 
     }
 
+    private void PhaseThreePlantHandsFromTheHand(TheClassWhichHasThePlayerHandAndFields alCabohne,
+                                                 TheClassWhichHasThePlayerHandAndFields donCorlebohne,
+                                                 TheClassWhichHasThePlayerHandAndFields joeBohnano,
+                                                 TheClassWhichHasThePlayerHandAndFields activePlayer,
+                                                 ThePlaceToKeepTheRevealedCards thePlaceToKeepTheRevealedCards,
+                                                 DrawPile drawPile,
+                                                 Hand discardPile,
+                                                 Boolean isThisASinglePlayerGame
+    )
+    {
+        if(activePlayer.hand.isTheHandEmpty() != true)
+        {
+            Card cardToPlant = activePlayer.hand.getTheCardAtTheFrontOfTheHand();
+            plantTheCardOnYourOwnField(activePlayer,cardToPlant, discardPile, isThisASinglePlayerGame);
+            if(activePlayer.hand.isTheHandEmpty() != true)
+            {
+                Scanner scanner = new Scanner(System.in);
+                System.out.print("\n Do you want to plant one more card? 1.Yes 2.No:");
+                int choice  = scanner.nextInt();
+                if(choice < 1 || choice > 2)
+                {
+                    throw new InvalidInputException("Wrong input for the question : do you want to plant one more card");
+                }
+                if(choice == 1)
+                {
+                    plantTheCardOnYourOwnField(activePlayer, cardToPlant, discardPile, isThisASinglePlayerGame);
+                }
+            }
+        }
+    }
+
     private void PhaseSixDrawCardsFromTheDrawPile(
             TheClassWhichHasThePlayerHandAndFields alCabohne,
             TheClassWhichHasThePlayerHandAndFields donCorlebohne,
