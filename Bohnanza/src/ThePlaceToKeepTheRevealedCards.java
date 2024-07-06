@@ -14,5 +14,6 @@ public interface ThePlaceToKeepTheRevealedCards {
     int returnTheNumberOfCardsInSlotOne();
     int returnTheNumberOfCardsInSlotTwo();
     int returnTheNumberOfCardsInSlotThree();
+    int returnTheTotalNumberOfCardsInAllTheSlots();
 
 }
