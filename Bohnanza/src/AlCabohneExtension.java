@@ -7,6 +7,21 @@ public class AlCabohneExtension extends LogicOfTheGame  {
 
     }
 
+    private void PhaseSixDrawCardsFromTheDrawPile(
+            TheClassWhichHasThePlayerHandAndFields alCabohne,
+            TheClassWhichHasThePlayerHandAndFields donCorlebohne,
+            TheClassWhichHasThePlayerHandAndFields joeBohnano,
+            TheClassWhichHasThePlayerHandAndFields activePlayer,
+            ThePlaceToKeepTheRevealedCards thePlaceToKeepTheRevealedCards,
+            DrawPile drawPile,
+            Hand discardPile,
+            Boolean isThisASinglePlayerGame
+    )
+    {
+       activePlayer.hand.AddACardToTheBackOfTheHand(drawPile.getOneCardFromTheDrawPile());
+       activePlayer.hand.AddACardToTheBackOfTheHand(drawPile.getOneCardFromTheDrawPile());
+    }
+
     private void phaseFour(
             TheClassWhichHasThePlayerHandAndFields alCabohne,
             TheClassWhichHasThePlayerHandAndFields donCorlebohne,
