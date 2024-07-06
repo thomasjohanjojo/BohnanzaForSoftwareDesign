@@ -7,6 +7,156 @@ public class AlCabohneExtension extends LogicOfTheGame  {
 
     }
 
+    private void PhaseOneUseTheLeftOverCards(TheClassWhichHasThePlayerHandAndFields alCabohne,
+                                             TheClassWhichHasThePlayerHandAndFields donCorlebohne,
+                                             TheClassWhichHasThePlayerHandAndFields joeBohnano,
+                                             TheClassWhichHasThePlayerHandAndFields activePlayer,
+                                             ThePlaceToKeepTheRevealedCards thePlaceToKeepTheRevealedCards,
+                                             DrawPile drawPile,
+                                             Hand discardPile,
+                                             Boolean isThisASinglePlayerGame
+    )
+    {
+        Scanner scanner = new Scanner(System.in);
+        while(thePlaceToKeepTheRevealedCards.returnTheTotalNumberOfCardsInAllTheSlots() != 0)
+        {
+            while(thePlaceToKeepTheRevealedCards.returnTheNumberOfCardsInSlotOne()!= 0 )
+            {
+                System.out.print("\n Do you want to plant the card or discard it?1.Plant 2.Discard:");
+                int choice = scanner.nextInt();
+                if(choice < 1 || choice > 2)
+                {
+                    throw new InvalidInputException("Invalid input");
+                }
+                if(choice == 1)
+                {
+                    Card cardToPlant = thePlaceToKeepTheRevealedCards.removeAndReturnACardFromSlotOne();
+                    plantTheCardOnYourOwnField(activePlayer, cardToPlant, discardPile, isThisASinglePlayerGame );
+                }
+                else if(choice == 2)
+                {
+                    Card cardToDiscard = thePlaceToKeepTheRevealedCards.removeAndReturnACardFromSlotOne();
+                    discardPile.AddACardToTheBackOfTheHand(cardToDiscard);
+                }
+            }
+
+            while(thePlaceToKeepTheRevealedCards.returnTheNumberOfCardsInSlotTwo() != 0)
+            {
+                System.out.print("\n Do you want to plant the card or discard it?1.Plant 2.Discard:");
+                int choice = scanner.nextInt();
+                if(choice < 1 || choice > 2)
+                {
+                    throw new InvalidInputException("Invalid input");
+                }
+                if(choice == 1)
+                {
+                    Card cardToPlant = thePlaceToKeepTheRevealedCards.removeAndReturnACardFromSlotTwo();
+                    plantTheCardOnYourOwnField(activePlayer, cardToPlant, discardPile, isThisASinglePlayerGame );
+                }
+                else if(choice == 2)
+                {
+                    Card cardToDiscard = thePlaceToKeepTheRevealedCards.removeAndReturnACardFromSlotTwo();
+                    discardPile.AddACardToTheBackOfTheHand(cardToDiscard);
+                }
+            }
+
+            while(thePlaceToKeepTheRevealedCards.returnTheNumberOfCardsInSlotThree() != 0)
+            {
+                System.out.print("\n Do you want to plant the card or discard it?1.Plant 2.Discard:");
+                int choice = scanner.nextInt();
+                if(choice < 1 || choice > 2)
+                {
+                    throw new InvalidInputException("Invalid input");
+                }
+                if(choice == 1)
+                {
+                    Card cardToPlant = thePlaceToKeepTheRevealedCards.removeAndReturnACardFromSlotThree();
+                    plantTheCardOnYourOwnField(activePlayer, cardToPlant, discardPile, isThisASinglePlayerGame );
+                }
+                else if(choice == 2)
+                {
+                    Card cardToDiscard = thePlaceToKeepTheRevealedCards.removeAndReturnACardFromSlotThree();
+                    discardPile.AddACardToTheBackOfTheHand(cardToDiscard);
+                }
+            }
+        }
+    }
+
+    private void PhaseTwoGiveBeansToTheBeansMafia(
+            TheClassWhichHasThePlayerHandAndFields alCabohne,
+            TheClassWhichHasThePlayerHandAndFields donCorlebohne,
+            TheClassWhichHasThePlayerHandAndFields joeBohnano,
+            TheClassWhichHasThePlayerHandAndFields activePlayer,
+            ThePlaceToKeepTheRevealedCards thePlaceToKeepTheRevealedCards,
+            DrawPile drawPile,
+            Hand discardPile,
+            Boolean isThisASinglePlayerGame
+    )
+    {
+        //Checking if the cards in the player's field one is similar
+        if(Objects.equals(activePlayer.fieldOne.getTheTypeOfCardInThisField(), alCabohne.fieldOne.getTheTypeOfCardInThisField()))
+        {
+            Card cardToGive = activePlayer.fieldOne.removeACardFromTheTopOfTheField();
+            alCabohne.player.plant(cardToGive, alCabohne.fieldOne, discardPile);
+        }
+        if(Objects.equals(activePlayer.fieldOne.getTheTypeOfCardInThisField(), donCorlebohne.fieldOne.getTheTypeOfCardInThisField()))
+        {
+            Card cardToGive = activePlayer.fieldOne.removeACardFromTheTopOfTheField();
+            donCorlebohne.player.plant(cardToGive, donCorlebohne.fieldOne, discardPile);
+        }
+        if(isThisASinglePlayerGame == true)
+        {
+            if(Objects.equals(activePlayer.fieldOne.getTheTypeOfCardInThisField(), joeBohnano.fieldOne.getTheTypeOfCardInThisField()))
+            {
+                Card cardToGive = activePlayer.fieldOne.removeACardFromTheTopOfTheField();
+                joeBohnano.player.plant(cardToGive, joeBohnano.fieldOne, discardPile);
+            }
+        }
+
+        //Checking if the cards in player's field two is similar
+        if(Objects.equals(activePlayer.fieldTwo.getTheTypeOfCardInThisField(), alCabohne.fieldOne.getTheTypeOfCardInThisField()))
+        {
+            Card cardToGive = activePlayer.fieldTwo.removeACardFromTheTopOfTheField();
+            alCabohne.player.plant(cardToGive, alCabohne.fieldOne, discardPile);
+        }
+        if(Objects.equals(activePlayer.fieldTwo.getTheTypeOfCardInThisField(), donCorlebohne.fieldOne.getTheTypeOfCardInThisField()))
+        {
+            Card cardToGive = activePlayer.fieldTwo.removeACardFromTheTopOfTheField();
+            donCorlebohne.player.plant(cardToGive, donCorlebohne.fieldOne, discardPile);
+        }
+        if(isThisASinglePlayerGame == true)
+        {
+            if(Objects.equals(activePlayer.fieldTwo.getTheTypeOfCardInThisField(), joeBohnano.fieldOne.getTheTypeOfCardInThisField()))
+            {
+                Card cardToGive = activePlayer.fieldTwo.removeACardFromTheTopOfTheField();
+                joeBohnano.player.plant(cardToGive, joeBohnano.fieldOne, discardPile);
+            }
+        }
+
+        //Checking for field three if it is there
+        if(activePlayer.isTheThirdFieldAvailable == true)
+        {
+            if(Objects.equals(activePlayer.fieldThree.getTheTypeOfCardInThisField(), alCabohne.fieldOne.getTheTypeOfCardInThisField()))
+            {
+                Card cardToGive = activePlayer.fieldThree.removeACardFromTheTopOfTheField();
+                alCabohne.player.plant(cardToGive, alCabohne.fieldOne, discardPile);
+            }
+            if(Objects.equals(activePlayer.fieldThree.getTheTypeOfCardInThisField(), donCorlebohne.fieldOne.getTheTypeOfCardInThisField()))
+            {
+                Card cardToGive = activePlayer.fieldThree.removeACardFromTheTopOfTheField();
+                donCorlebohne.player.plant(cardToGive, donCorlebohne.fieldOne, discardPile);
+            }
+            if(isThisASinglePlayerGame == true)
+            {
+                if(Objects.equals(activePlayer.fieldThree.getTheTypeOfCardInThisField(), joeBohnano.fieldOne.getTheTypeOfCardInThisField()))
+                {
+                    Card cardToGive = activePlayer.fieldThree.removeACardFromTheTopOfTheField();
+                    joeBohnano.player.plant(cardToGive, joeBohnano.fieldOne, discardPile);
+                }
+            }
+        }
+    }
+
     private void PhaseThreePlantHandsFromTheHand(TheClassWhichHasThePlayerHandAndFields alCabohne,
                                                  TheClassWhichHasThePlayerHandAndFields donCorlebohne,
                                                  TheClassWhichHasThePlayerHandAndFields joeBohnano,
