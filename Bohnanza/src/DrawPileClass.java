@@ -29,4 +29,9 @@ public class DrawPileClass implements LogicOfTheGame.DrawPile
         return false;
     }
 
+    public void shuffleTheDrawPile()
+    {
+        Collections.shuffle(cardsOfTheDrawPile);
+    }
+
 }

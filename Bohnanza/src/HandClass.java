@@ -40,16 +40,33 @@ public class HandClass implements LogicOfTheGame.Hand {
 
     public LogicOfTheGame.Card getACardFromAnyLocationInTheHand(int locationOfTheCard)
     {
-        return listOfCardsInTheHand.remove(locationOfTheCard - 1);
+        return listOfCardsInTheHand.remove(locationOfTheCard);
     }
 
     public int getTheNumberOfCardsInTheHand()
     {
-        return 0;
+        return listOfCardsInTheHand.size();
     }
 
     public boolean isTheHandEmpty()
     {
-        return true;
+        if(listOfCardsInTheHand.isEmpty())
+        {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public String getTheTypeOfCardInFrontOfTheHand()
+    {
+        if(isTheHandEmpty() == false)
+        {
+            return listOfCardsInTheHand.get(0).returnTheTypeOfTheCard();
+        }
+        else {
+            return null;
+        }
     }
 }

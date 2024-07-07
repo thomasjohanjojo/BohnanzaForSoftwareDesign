@@ -33,4 +33,14 @@ public class AreasToKeepTheTurnedOverAndTradedCardsClass implements LogicOfTheGa
         }
     }
 
+    public int returnTheNumberOfTurnedOverCardsInTheTurnedOverCardsArea()
+    {
+        return turnedOverCardsArea.size();
+    }
+
+    public int returnTheNumberOfTradedCardsInTheTradedCardsArea()
+    {
+        return tradedCardsArea.size();
+    }
+
 }
