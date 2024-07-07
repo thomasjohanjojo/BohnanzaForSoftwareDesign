@@ -22,12 +22,14 @@ public class AreasToKeepTheTurnedOverAndTradedCardsClass implements LogicOfTheGa
     }
 
     public void displayTheTurnedOverCardsInOrder(){
+        System.out.print("\n");
         for (LogicOfTheGame.Card indivCard: turnedOverCardsArea) {
             System.out.println(indivCard.returnTheTypeOfTheCard());
         }
     }
 
     public void displayTheCardsInTheTradedCardsArea(){
+        System.out.print("\n");
         for (LogicOfTheGame.Card indivCard: tradedCardsArea) {
             System.out.println(indivCard.returnTheTypeOfTheCard());
         }
