@@ -24,9 +24,16 @@ public class DrawPileClass implements LogicOfTheGame.DrawPile
         cardsOfTheDrawPile.addLast(cardToBeAddedToTheDrawPile);
     }
 
-    public boolean isDrawPileEmpty() // Yet to be completed
+    public boolean isDrawPileEmpty()
     {
-        return false;
+        if(cardsOfTheDrawPile.isEmpty())
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public void shuffleTheDrawPile()
