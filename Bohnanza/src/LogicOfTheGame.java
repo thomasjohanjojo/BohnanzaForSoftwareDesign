@@ -71,11 +71,47 @@ public class LogicOfTheGame {
         {
             for(int activePlayerNumber = 0; activePlayerNumber < players.length; activePlayerNumber++)
             {
+                System.out.print("\n Turn of player:" + (activePlayerNumber+1));
+                System.out.print("\n Phase One:");
+                players[activePlayerNumber].hand.DisplayTheCardsInTheHand();
                 plantingTheFirstCardAndMaybeAlsoTheSecondCard(players[activePlayerNumber],discardPile);
+                System.out.print("\n Fields in order:");
+                System.out.print("\n Field One:");
+                players[activePlayerNumber].fieldOne.displayAllTheCardsInTheField();
+                System.out.print("\n Field Two:");
+                players[activePlayerNumber].fieldTwo.displayAllTheCardsInTheField();
+                if(players[activePlayerNumber].isTheThirdFieldAvailable == true)
+                {
+                    System.out.print("\n Field 3:");
+                    players[activePlayerNumber].fieldThree.displayAllTheCardsInTheField();
+                }
+
+                System.out.print("\n Getting turned Over Cards:");
+                System.out.print("\n Turned Over Cards:");
                 gettingTurnedOverCards(players[activePlayerNumber], drawPile, discardPile);
+                players[activePlayerNumber].theAreaToKeepTheTurnedOverAndTradedCards.displayTheTurnedOverCardsInOrder();
+                System.out.print("\n Trading phase:");
                 tradingPhase(activePlayerNumber, players,drawPile, discardPile);
+                System.out.print("\n Planting turned over and traded cards:");
+                System.out.print("\n Turned over Cards:");
+                players[activePlayerNumber].theAreaToKeepTheTurnedOverAndTradedCards.displayTheTurnedOverCardsInOrder();
+                System.out.print("\n Traded cards:");
+                players[activePlayerNumber].theAreaToKeepTheTurnedOverAndTradedCards.displayTheCardsInTheTradedCardsArea();
                 plantingTurnedOverAndTradedCards(players[activePlayerNumber], players, discardPile);
+
+                System.out.print("\n Drawing three cards");
                 DrawThreeCards(players[activePlayerNumber], drawPile);
+                System.out.print("\n Hand of the player after drawing three cards:");
+                players[activePlayerNumber].hand.DisplayTheCardsInTheHand();
+                System.out.print("\n Fields of the player after the turn:");
+                players[activePlayerNumber].fieldOne.displayAllTheCardsInTheField();
+                players[activePlayerNumber].fieldTwo.displayAllTheCardsInTheField();
+                if(players[activePlayerNumber].isTheThirdFieldAvailable == true)
+                {
+                    players[activePlayerNumber].fieldThree.displayAllTheCardsInTheField();
+                }
+
+                System.out.print("\n Turn over for the current player\n");
             }
 
             if(drawPile.isDrawPileEmpty() == true)
@@ -95,7 +131,7 @@ public class LogicOfTheGame {
     {
         for(int i = 0; i < players.length; i++)
         {
-            System.out.print("\n Coins of Player:" + i + " is:" + players[i].player.returnTheNumberOfCoinsThatThePlayerCurrentlyHas());
+            System.out.print("\n Coins of Player:" + (i+1) + " is:" + players[i].player.returnTheNumberOfCoinsThatThePlayerCurrentlyHas());
         }
     }
 
@@ -153,10 +189,11 @@ public class LogicOfTheGame {
     protected void plantingTheFirstCardAndMaybeAlsoTheSecondCard(TheClassWhichHasThePlayerHandAndFields activePlayer, Hand discardPile)
     {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("You must plant a card if you have one");
+        System.out.print("\nYou must plant a card if you have one");
 
         if(activePlayer.hand.isTheHandEmpty() == false)
         {
+            System.out.print("\n Hand of the Player:");
             activePlayer.hand.DisplayTheCardsInTheHand();
             Card cardToPlant = activePlayer.hand.getTheCardAtTheFrontOfTheHand();
             plantTheCard(activePlayer, discardPile, cardToPlant);
@@ -171,11 +208,16 @@ public class LogicOfTheGame {
                 System.out.print("Wrong Choice, Do again");
                 return;
             }
-            else
+            if(choice == 1)
             {
+                System.out.print("\n Cards in the Hand:");
                 activePlayer.hand.DisplayTheCardsInTheHand();
                 Card cardToPlant = activePlayer.hand.getTheCardAtTheFrontOfTheHand();
                 plantTheCard(activePlayer, discardPile, cardToPlant);
+            }
+            else if(choice == 0)
+            {
+                return;
             }
         }
     }
@@ -302,7 +344,8 @@ public class LogicOfTheGame {
 
         System.out.println("\n With which player do you want to trade: 1, 2, 3, 4, (5 too if exists) ? :");
         int theIndexOfThePlayerWithWhichTradeMustBeDone = scanner.nextInt();
-        if(theIndexOfThePlayerWithWhichTradeMustBeDone == theIndexOfTheCurrentlyActivePlayerInThePlayersArray + 1)
+        theIndexOfThePlayerWithWhichTradeMustBeDone = theIndexOfThePlayerWithWhichTradeMustBeDone -1;
+        if(theIndexOfThePlayerWithWhichTradeMustBeDone == theIndexOfTheCurrentlyActivePlayerInThePlayersArray)
         {
             System.out.print("\n Self trade not possible");
             return;
@@ -324,6 +367,7 @@ public class LogicOfTheGame {
 
             if(thePlaceFromWhichToTradeAwayTheCard == 0)
             {
+                System.out.print("\n Cards in Hand");
                 players[theIndexOfTheCurrentlyActivePlayerInThePlayersArray].hand.DisplayTheCardsInTheHand();
                 System.out.print("\n Which card do you want to trade away? Index starts from 0:");
                 int theIndexOfTheCardToTradeAway = scanner.nextInt();
@@ -344,8 +388,9 @@ public class LogicOfTheGame {
 
             else if(thePlaceFromWhichToTradeAwayTheCard == 1)
             {
+                System.out.print("\n Turned Over Cards:");
                 players[theIndexOfTheCurrentlyActivePlayerInThePlayersArray].theAreaToKeepTheTurnedOverAndTradedCards.displayTheTurnedOverCardsInOrder();
-                System.out.print("\nEnter the index of the card which you want to trade away, starting from 0 ending at 1:");
+                System.out.print("\n Enter the index of the card which you want to trade away, starting from 0 ending at 1:");
                 int theIndexOfTheCardToTradeAway = scanner.nextInt();
 
                 if(theIndexOfTheCardToTradeAway > 1 || theIndexOfTheCardToTradeAway < 0)
@@ -401,6 +446,8 @@ public class LogicOfTheGame {
         plantingTurnedOverCards(activePlayer, discardPile);
         for(int i = 0; i < players.length; i++)
         {
+            System.out.print("\n Planting traded cards of Player:" + (i+1));
+            players[i].theAreaToKeepTheTurnedOverAndTradedCards.displayTheCardsInTheTradedCardsArea();
             plantingTradedCards(players[i], discardPile);
         }
 
@@ -408,9 +455,11 @@ public class LogicOfTheGame {
 
     protected void plantingTurnedOverCards(TheClassWhichHasThePlayerHandAndFields activePlayer, Hand discardPile)
     {
+        System.out.print("\n Planting turned over cards:");
         Scanner scanner = new Scanner(System.in);
         if(activePlayer.theAreaToKeepTheTurnedOverAndTradedCards.returnTheNumberOfTurnedOverCardsInTheTurnedOverCardsArea() > 0)
         {
+            System.out.print("\n Turned over cards:");
             activePlayer.theAreaToKeepTheTurnedOverAndTradedCards.displayTheTurnedOverCardsInOrder();
             while(activePlayer.theAreaToKeepTheTurnedOverAndTradedCards.returnTheNumberOfTurnedOverCardsInTheTurnedOverCardsArea() != 0)
             {
@@ -425,6 +474,7 @@ public class LogicOfTheGame {
         Scanner scanner = new Scanner(System.in);
         if(activePlayer.theAreaToKeepTheTurnedOverAndTradedCards.returnTheNumberOfTradedCardsInTheTradedCardsArea() > 0)
         {
+            System.out.print("\n Traded Cards:");
             activePlayer.theAreaToKeepTheTurnedOverAndTradedCards.displayTheCardsInTheTradedCardsArea();
             while(activePlayer.theAreaToKeepTheTurnedOverAndTradedCards.returnTheNumberOfTradedCardsInTheTradedCardsArea() != 0)
             {
