@@ -300,9 +300,9 @@ public class LogicOfTheGame {
     {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("\n With which player do you want to trade: 1, 2, 3, 4 ? :");
+        System.out.println("\n With which player do you want to trade: 1, 2, 3, 4, (5 too if exists) ? :");
         int theIndexOfThePlayerWithWhichTradeMustBeDone = scanner.nextInt();
-        if(theIndexOfThePlayerWithWhichTradeMustBeDone == theIndexOfTheCurrentlyActivePlayerInThePlayersArray)
+        if(theIndexOfThePlayerWithWhichTradeMustBeDone == theIndexOfTheCurrentlyActivePlayerInThePlayersArray + 1)
         {
             System.out.print("\n Self trade not possible");
             return;
