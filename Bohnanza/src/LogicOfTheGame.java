@@ -127,7 +127,7 @@ public class LogicOfTheGame {
 
     }
 
-    private void showTheScoresOfAllThePlayers(TheClassWhichHasThePlayerHandAndFields[] players)
+    protected void showTheScoresOfAllThePlayers(TheClassWhichHasThePlayerHandAndFields[] players)
     {
         for(int i = 0; i < players.length; i++)
         {
@@ -135,7 +135,7 @@ public class LogicOfTheGame {
         }
     }
 
-    private void HarvestAllTheFieldsOfAllThePlayers(TheClassWhichHasThePlayerHandAndFields[] players, Hand discardPile)
+    protected void HarvestAllTheFieldsOfAllThePlayers(TheClassWhichHasThePlayerHandAndFields[] players, Hand discardPile)
     {
         for(int i = 0; i < players.length; i ++)
         {
@@ -149,7 +149,7 @@ public class LogicOfTheGame {
         }
     }
 
-    private void transferCardsFromTheDiscardPileToTheDrawPileAndShuffleTheDrawPile(DrawPile drawPile, Hand discardPile)
+    protected void transferCardsFromTheDiscardPileToTheDrawPileAndShuffleTheDrawPile(DrawPile drawPile, Hand discardPile)
     {
 
         while (discardPile.isTheHandEmpty() == false)

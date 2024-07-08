@@ -38,6 +38,7 @@ public class AlCabohneExtension extends LogicOfTheGame  {
                     if(drawPile.isDrawPileEmpty() == true)
                     {
                         i++;
+                        transferCardsFromTheDiscardPileToTheDrawPileAndShuffleTheDrawPile(drawPile, discardPile);
                     }
                     System.out.print("\n Phase 5 Cultivate the beans:\n");
                     phaseFiveCultivateTheBeans(alCabohne, donCorlebohne, joeBohnano, arrayOfPlayers[activePlayerNumber],thePlaceToKeepTheRevealedCards,drawPile,discardPile,isThisASinglePlayerGame);
@@ -46,13 +47,29 @@ public class AlCabohneExtension extends LogicOfTheGame  {
                         System.out.print("\n Phase 6 Draw cards from the drawpile:\n");
                         PhaseSixDrawCardsFromTheDrawPile(alCabohne, donCorlebohne, joeBohnano, arrayOfPlayers[activePlayerNumber], thePlaceToKeepTheRevealedCards, drawPile, discardPile, isThisASinglePlayerGame);
                     }
-                    else {
+                    else
+                    {
                         i++;
+                        transferCardsFromTheDiscardPileToTheDrawPileAndShuffleTheDrawPile(drawPile, discardPile);
                     }
-                    }
+                }
             }
 
 
+        }
+        HarvestAllTheFieldsOfAllThePlayers(arrayOfPlayers, discardPile);
+        alCabohne.player.harvest(alCabohne.fieldOne, discardPile);
+        donCorlebohne.player.harvest(donCorlebohne.fieldOne, discardPile);
+        if(isThisASinglePlayerGame)
+        {
+            joeBohnano.player.harvest(joeBohnano.fieldOne, discardPile);
+        }
+        showTheScoresOfAllThePlayers(arrayOfPlayers);
+        System.out.print("\n Al Cabohne:" + alCabohne.player.returnTheNumberOfCoinsThatThePlayerCurrentlyHas());
+        System.out.print("\n Don Corlebohne:" + donCorlebohne.player.returnTheNumberOfCoinsThatThePlayerCurrentlyHas());
+        if(isThisASinglePlayerGame)
+        {
+            System.out.print("\n Joe Bohnano:" + joeBohnano.player.returnTheNumberOfCoinsThatThePlayerCurrentlyHas());
         }
     }
 
