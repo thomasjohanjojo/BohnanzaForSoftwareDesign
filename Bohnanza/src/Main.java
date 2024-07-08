@@ -112,7 +112,7 @@ public class Main {
 
 
         }
-        else // Code for the extension
+        else if(choice == 2) // Code for the extension
         {
             List<TheClassWhichHasThePlayerHandAndFields> listOfPlayers = new ArrayList<>();
             Boolean isThisASinglePlayerGame = false;
@@ -194,6 +194,47 @@ public class Main {
             //Creating cards and drawpile and discard pile, have not created the cards yet.
             DrawPileClass drawPile = new DrawPileClass();
             HandClass discardPile = new HandClass();
+            for(int i = 0; i < 8 ; i++)
+            {
+                CardClass redBeanCard = new CardClass("RedBean", 2, 3, 4, 5);
+                drawPile.addACardToTheDrawPile(redBeanCard);
+            }
+            for(int i = 0; i < 10; i++)
+            {
+                CardClass blackEyedBeanCard = new CardClass("BlackEyedBean",2, 4, 5, 6);
+                drawPile.addACardToTheDrawPile(blackEyedBeanCard);
+            }
+            for(int i = 0; i < 6; i++)
+            {
+                CardClass gardenBeanCard = new CardClass("GardenBean", 0, 2, 3, 0);
+                drawPile.addACardToTheDrawPile(gardenBeanCard);
+            }
+            for(int i = 0; i < 12; i++)
+            {
+                CardClass soyBeanCard = new CardClass("SoyBean", 2,4, 6, 7);
+                drawPile.addACardToTheDrawPile(soyBeanCard);
+            }
+            for(int i = 0; i < 14; i++)
+            {
+                CardClass greenBean = new CardClass("GreenBean", 3,5, 6, 7);
+                drawPile.addACardToTheDrawPile(greenBean);
+            }
+            for(int i = 0; i < 16; i++)
+            {
+                CardClass stinkBean = new CardClass("StinkBean", 3,5, 7, 8);
+                drawPile.addACardToTheDrawPile(stinkBean);
+            }
+            for(int i = 0; i < 18; i++)
+            {
+                CardClass chiliBean = new CardClass("ChiliBean", 3,6, 8, 9);
+                drawPile.addACardToTheDrawPile(chiliBean);
+            }
+            for(int i = 0; i < 20; i++)
+            {
+                CardClass blueBean = new CardClass("BlueBean", 4,6, 8, 10);
+                drawPile.addACardToTheDrawPile(blueBean);
+            }
+            drawPile.shuffleTheDrawPile();
 
 
             AlCabohneExtension alCabohneExtension = new AlCabohneExtension();
