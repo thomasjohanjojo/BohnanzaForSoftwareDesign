@@ -2,9 +2,100 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class AlCabohneExtension extends LogicOfTheGame  {
-    public void logicOfTheAlCabohneExtension()
+    public void logicOfTheAlCabohneExtension(
+            TheClassWhichHasThePlayerHandAndFields alCabohne,
+            TheClassWhichHasThePlayerHandAndFields donCorlebohne,
+            TheClassWhichHasThePlayerHandAndFields joeBohnano,
+            TheClassWhichHasThePlayerHandAndFields[] arrayOfPlayers,
+            ThePlaceToKeepTheRevealedCards thePlaceToKeepTheRevealedCards,
+            DrawPile drawPile,
+            Hand discardPile,
+            Boolean isThisASinglePlayerGame
+    )
     {
+        boolean isThisTheStartOfTheGame = true;
+        DistributeInitialCardsToThePlayers(arrayOfPlayers, drawPile, isThisASinglePlayerGame);
+        DealTheCardsToTheMafia(alCabohne, donCorlebohne, joeBohnano, drawPile, isThisASinglePlayerGame);
+        for(int i = 0; i<3;)
+        {
+            if(isThisASinglePlayerGame == false)
+            {
+                for(int activePlayerNumber = 0; i < arrayOfPlayers.length; activePlayerNumber++)
+                {
+                    System.out.print("\n Start of turn for player:" + (i+1));
+                    if (isThisTheStartOfTheGame == false)
+                    {
+                        System.out.print("\n Phase One: Use the left over cards:\n");
+                        PhaseOneUseTheLeftOverCards(alCabohne, donCorlebohne, joeBohnano, arrayOfPlayers[activePlayerNumber], thePlaceToKeepTheRevealedCards, drawPile, discardPile, isThisASinglePlayerGame);
+                        System.out.print("\n Phase Two: Give beans to the bean mafia:\n");
+                        PhaseTwoGiveBeansToTheBeansMafia(alCabohne, donCorlebohne, joeBohnano, arrayOfPlayers[activePlayerNumber], thePlaceToKeepTheRevealedCards, drawPile, discardPile, isThisASinglePlayerGame);
+                        isThisTheStartOfTheGame = false;
+                    }
+                    System.out.print("\n Phase 3 plant beans from hand:\n");
+                    PhaseThreePlantHandsFromTheHand(alCabohne, donCorlebohne, joeBohnano, arrayOfPlayers[activePlayerNumber], thePlaceToKeepTheRevealedCards,drawPile,discardPile,isThisASinglePlayerGame);
+                    System.out.print("\n Phase 4 Reveal beans from drawpile:\n");
+                    phaseFour(alCabohne, donCorlebohne, joeBohnano, arrayOfPlayers[activePlayerNumber],thePlaceToKeepTheRevealedCards,drawPile,discardPile,isThisASinglePlayerGame);
+                    if(drawPile.isDrawPileEmpty() == true)
+                    {
+                        i++;
+                    }
+                    System.out.print("\n Phase 5 Cultivate the beans:\n");
+                    phaseFiveCultivateTheBeans(alCabohne, donCorlebohne, joeBohnano, arrayOfPlayers[activePlayerNumber],thePlaceToKeepTheRevealedCards,drawPile,discardPile,isThisASinglePlayerGame);
+                    if(drawPile.isDrawPileEmpty() != false)
+                    {
+                        System.out.print("\n Phase 6 Draw cards from the drawpile:\n");
+                        PhaseSixDrawCardsFromTheDrawPile(alCabohne, donCorlebohne, joeBohnano, arrayOfPlayers[activePlayerNumber], thePlaceToKeepTheRevealedCards, drawPile, discardPile, isThisASinglePlayerGame);
+                    }
+                    else {
+                        i++;
+                    }
+                    }
+            }
 
+
+        }
+    }
+
+    private void DistributeInitialCardsToThePlayers(TheClassWhichHasThePlayerHandAndFields players[], DrawPile drawPile, Boolean isThisASinglePlayerGame)
+    {
+        if(isThisASinglePlayerGame == false)
+        {
+            distributeTheInitialFiveCardsToThePlayer(players, drawPile);
+
+
+        }
+    }
+
+    private void DealTheCardsToTheMafia(TheClassWhichHasThePlayerHandAndFields alCabohne,
+                                        TheClassWhichHasThePlayerHandAndFields donCorlebohne,
+                                        TheClassWhichHasThePlayerHandAndFields joeBohnano,
+                                        DrawPile drawPile,
+                                        Boolean isThisASinglePlayerGame)
+    {
+        if(isThisASinglePlayerGame == false)
+        {
+            Boolean hasDonCorlebohneBeenDealtACard = false;
+            while(hasDonCorlebohneBeenDealtACard == false)
+            {
+                Card cardToDeal = drawPile.getOneCardFromTheDrawPile();
+                if(alCabohne.fieldOne.getTheNumberOfCardsInThisField() != 0)
+                {
+                    if(Objects.equals(alCabohne.fieldOne.getTheTypeOfCardInThisField(), cardToDeal.returnTheTypeOfTheCard()))
+                    {
+                        alCabohne.fieldOne.addCardsToTheField(cardToDeal);
+                    }
+                    else
+                    {
+                        donCorlebohne.fieldOne.addCardsToTheField(cardToDeal);
+                        hasDonCorlebohneBeenDealtACard = true;
+                    }
+                }
+                else
+                {
+                    alCabohne.fieldOne.addCardsToTheField(cardToDeal);
+                }
+            }
+        }
     }
 
     private void PhaseOneUseTheLeftOverCards(TheClassWhichHasThePlayerHandAndFields alCabohne,
@@ -228,26 +319,45 @@ public class AlCabohneExtension extends LogicOfTheGame  {
     )
     {
         //The phase 4 for the first revealed card
+        if(drawPile.isDrawPileEmpty())
+        {
+            return;
+        }
         thePlaceToKeepTheRevealedCards.addACardToSlotOne(drawPile.getOneCardFromTheDrawPile());
         while(Objects.equals(alCabohne.fieldOne.getTheTypeOfCardInThisField(), thePlaceToKeepTheRevealedCards.returnTheCardTypeInSlotOne()))
         {
             Card cardToTransferToTheBoss = thePlaceToKeepTheRevealedCards.removeAndReturnACardFromSlotOne();
             alCabohne.player.plant(cardToTransferToTheBoss, alCabohne.fieldOne, discardPile);
             thePlaceToKeepTheRevealedCards.addACardToSlotOne(drawPile.getOneCardFromTheDrawPile());
+            if(drawPile.isDrawPileEmpty())
+            {
+                return;
+            }
         }
         while(Objects.equals(donCorlebohne.fieldOne.getTheTypeOfCardInThisField(), thePlaceToKeepTheRevealedCards.returnTheCardTypeInSlotOne()))
         {
             Card cardToTranferToTheBoss = thePlaceToKeepTheRevealedCards.removeAndReturnACardFromSlotOne();
             donCorlebohne.player.plant(cardToTranferToTheBoss, donCorlebohne.fieldOne, discardPile);
             thePlaceToKeepTheRevealedCards.addACardToSlotOne(drawPile.getOneCardFromTheDrawPile());
+            if(drawPile.isDrawPileEmpty())
+            {
+                return;
+            }
         }
         if(isThisASinglePlayerGame == true)
         {
+            if(drawPile.isDrawPileEmpty()) {
+            return;
+            }
             while(Objects.equals(joeBohnano.fieldOne.getTheTypeOfCardInThisField(), thePlaceToKeepTheRevealedCards.returnTheCardTypeInSlotOne()))
             {
                 Card cardToTransferToTheBoss = thePlaceToKeepTheRevealedCards.removeAndReturnACardFromSlotOne();
                 joeBohnano.player.plant(cardToTransferToTheBoss, joeBohnano.fieldOne, discardPile);
                 thePlaceToKeepTheRevealedCards.addACardToSlotOne(drawPile.getOneCardFromTheDrawPile());
+                if(drawPile.isDrawPileEmpty())
+                {
+                    return;
+                }
             }
         }
 
@@ -258,50 +368,64 @@ public class AlCabohneExtension extends LogicOfTheGame  {
         }
 
         //The phase 4 for the second revealed card
+        if(drawPile.isDrawPileEmpty()){return;}
         thePlaceToKeepTheRevealedCards.addACardToSlotTwo(drawPile.getOneCardFromTheDrawPile());
         while(Objects.equals(alCabohne.fieldOne.getTheTypeOfCardInThisField(), thePlaceToKeepTheRevealedCards.returnTheCardTypeInSlotTwo()))
         {
             Card cardToTransferToTheBoss = thePlaceToKeepTheRevealedCards.removeAndReturnACardFromSlotTwo();
             alCabohne.player.plant(cardToTransferToTheBoss, alCabohne.fieldOne, discardPile);
             thePlaceToKeepTheRevealedCards.addACardToSlotTwo(drawPile.getOneCardFromTheDrawPile());
+            if(drawPile.isDrawPileEmpty()){return;}
         }
+        if(drawPile.isDrawPileEmpty()){return;}
         while(Objects.equals(donCorlebohne.fieldOne.getTheTypeOfCardInThisField(), thePlaceToKeepTheRevealedCards.returnTheCardTypeInSlotTwo()))
         {
             Card cardToTranferToTheBoss = thePlaceToKeepTheRevealedCards.removeAndReturnACardFromSlotTwo();
             donCorlebohne.player.plant(cardToTranferToTheBoss, donCorlebohne.fieldOne, discardPile);
             thePlaceToKeepTheRevealedCards.addACardToSlotTwo(drawPile.getOneCardFromTheDrawPile());
+            if(drawPile.isDrawPileEmpty()){return;}
         }
         if(isThisASinglePlayerGame == true)
         {
+            if(drawPile.isDrawPileEmpty()){return;}
             while(Objects.equals(joeBohnano.fieldOne.getTheTypeOfCardInThisField(), thePlaceToKeepTheRevealedCards.returnTheCardTypeInSlotTwo()))
             {
                 Card cardToTransferToTheBoss = thePlaceToKeepTheRevealedCards.removeAndReturnACardFromSlotTwo();
                 joeBohnano.player.plant(cardToTransferToTheBoss, joeBohnano.fieldOne, discardPile);
                 thePlaceToKeepTheRevealedCards.addACardToSlotTwo(drawPile.getOneCardFromTheDrawPile());
+                if(drawPile.isDrawPileEmpty()){return;}
             }
         }
 
         //The Phase 4 for the third revealed card
+        if(drawPile.isDrawPileEmpty()){return;}
         thePlaceToKeepTheRevealedCards.addACardToSlotThree(drawPile.getOneCardFromTheDrawPile());
         while(Objects.equals(alCabohne.fieldOne.getTheTypeOfCardInThisField(), thePlaceToKeepTheRevealedCards.returnTheCardTypeInSlotThree()))
         {
+            if(drawPile.isDrawPileEmpty()){return;}
             Card cardToTransferToTheBoss = thePlaceToKeepTheRevealedCards.removeAndReturnACardFromSlotThree();
             alCabohne.player.plant(cardToTransferToTheBoss, alCabohne.fieldOne, discardPile);
             thePlaceToKeepTheRevealedCards.addACardToSlotThree(drawPile.getOneCardFromTheDrawPile());
+            if(drawPile.isDrawPileEmpty()){return;}
         }
+        if(drawPile.isDrawPileEmpty()){return;}
         while(Objects.equals(donCorlebohne.fieldOne.getTheTypeOfCardInThisField(), thePlaceToKeepTheRevealedCards.returnTheCardTypeInSlotThree()))
         {
+            if(drawPile.isDrawPileEmpty()){return;}
             Card cardToTranferToTheBoss = thePlaceToKeepTheRevealedCards.removeAndReturnACardFromSlotThree();
             donCorlebohne.player.plant(cardToTranferToTheBoss, donCorlebohne.fieldOne, discardPile);
             thePlaceToKeepTheRevealedCards.addACardToSlotThree(drawPile.getOneCardFromTheDrawPile());
+            if(drawPile.isDrawPileEmpty()){return;}
         }
         if(isThisASinglePlayerGame == true)
         {
+            if(drawPile.isDrawPileEmpty()){return;}
             while(Objects.equals(joeBohnano.fieldOne.getTheTypeOfCardInThisField(), thePlaceToKeepTheRevealedCards.returnTheCardTypeInSlotThree()))
             {
                 Card cardToTransferToTheBoss = thePlaceToKeepTheRevealedCards.removeAndReturnACardFromSlotThree();
                 joeBohnano.player.plant(cardToTransferToTheBoss, joeBohnano.fieldOne, discardPile);
                 thePlaceToKeepTheRevealedCards.addACardToSlotThree(drawPile.getOneCardFromTheDrawPile());
+                if(drawPile.isDrawPileEmpty()){return;}
             }
         }
 

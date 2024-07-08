@@ -162,7 +162,7 @@ public class LogicOfTheGame {
 
 
 
-    private void distributeTheInitialFiveCardsToThePlayer(TheClassWhichHasThePlayerHandAndFields[] players, DrawPile drawPile)
+    protected void distributeTheInitialFiveCardsToThePlayer(TheClassWhichHasThePlayerHandAndFields[] players, DrawPile drawPile)
     {
         int i = 0;
         for(i = 0; i < players.length; i++)
