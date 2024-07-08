@@ -114,7 +114,98 @@ public class Main {
         }
         else // Code for the extension
         {
+            List<TheClassWhichHasThePlayerHandAndFields> listOfPlayers = new ArrayList<>();
+            Boolean isThisASinglePlayerGame = false;
+            for(int i = 0; i < 2; i++)
+            {
+                PlayerClass player = new PlayerClass();
+                HandClass hand = new HandClass();
+                FieldClass fieldOne = new FieldClass();
+                FieldClass fieldTwo = new FieldClass();
+                FieldClass fieldThree = new FieldClass();
+                AreasToKeepTheTurnedOverAndTradedCardsClass areasToKeepTheTurnedOverAndTradedCardsClass =  new AreasToKeepTheTurnedOverAndTradedCardsClass();
+                TheClassWhichHasThePlayerHandAndFields playerObject = new TheClassWhichHasThePlayerHandAndFields(
+                        player,
+                        hand,
+                        fieldOne,
+                        fieldTwo,
+                        fieldThree,
+                        areasToKeepTheTurnedOverAndTradedCardsClass,
+                        true);
+                listOfPlayers.add(playerObject);
+            }
+            TheClassWhichHasThePlayerHandAndFields[] arrayOfPlayers = listOfPlayers.toArray(new TheClassWhichHasThePlayerHandAndFields[0]);
 
+            //Creating the al cabohne object
+            TheClassWhichHasThePlayerHandAndFields alCabohne;
+            {
+                PlayerClass player = new PlayerClass();
+                HandClass hand = new HandClass();
+                FieldClass fieldOne = new FieldClass();
+                AreasToKeepTheTurnedOverAndTradedCardsClass areasToKeepTheTurnedOverAndTradedCardsClass = new AreasToKeepTheTurnedOverAndTradedCardsClass();
+                alCabohne = new TheClassWhichHasThePlayerHandAndFields(
+                        player,
+                        hand,
+                        fieldOne,
+                        fieldOne,
+                        fieldOne,
+                        areasToKeepTheTurnedOverAndTradedCardsClass,
+                        false
+                );
+            }
+
+            //Creating the don Corlebohne Object
+            TheClassWhichHasThePlayerHandAndFields donCorlebohne;
+            {
+                PlayerClass player = new PlayerClass();
+                HandClass hand = new HandClass();
+                FieldClass fieldOne = new FieldClass();
+                AreasToKeepTheTurnedOverAndTradedCardsClass areasToKeepTheTurnedOverAndTradedCardsClass = new AreasToKeepTheTurnedOverAndTradedCardsClass();
+                donCorlebohne = new TheClassWhichHasThePlayerHandAndFields(
+                        player,
+                        hand,
+                        fieldOne,
+                        fieldOne,
+                        fieldOne,
+                        areasToKeepTheTurnedOverAndTradedCardsClass,
+                        false
+                );
+            }
+
+            //Creating the joe Bohnano object
+            TheClassWhichHasThePlayerHandAndFields joeBohnano;
+            {
+                PlayerClass player = new PlayerClass();
+                HandClass hand = new HandClass();
+                FieldClass fieldOne = new FieldClass();
+                AreasToKeepTheTurnedOverAndTradedCardsClass areasToKeepTheTurnedOverAndTradedCardsClass = new AreasToKeepTheTurnedOverAndTradedCardsClass();
+                joeBohnano = new TheClassWhichHasThePlayerHandAndFields(
+                        player,
+                        hand,
+                        fieldOne,
+                        fieldOne,
+                        fieldOne,
+                        areasToKeepTheTurnedOverAndTradedCardsClass,
+                        false
+                );
+            }
+            ThePlaceToKeepTheRevealedCardsClass thePlaceToKeepTheRevealedCards = new ThePlaceToKeepTheRevealedCardsClass();
+
+            //Creating cards and drawpile and discard pile, have not created the cards yet.
+            DrawPileClass drawPile = new DrawPileClass();
+            HandClass discardPile = new HandClass();
+
+
+            AlCabohneExtension alCabohneExtension = new AlCabohneExtension();
+            alCabohneExtension.logicOfTheAlCabohneExtension(alCabohne,
+                    donCorlebohne,
+                    joeBohnano,
+                    arrayOfPlayers,
+                    thePlaceToKeepTheRevealedCards,
+                    drawPile,
+                    discardPile,
+                    isThisASinglePlayerGame
+                    );
         }
 
 
